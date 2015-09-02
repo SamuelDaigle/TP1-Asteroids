@@ -66,18 +66,18 @@ namespace Exercice5
                 if (position.Y >= screenHeight)
                     position.Y -= screenHeight;
                 if (position.Y <= 0)
-                    position.Y += screenHeight + state.GetSprite().GetDimension().Y;
+                    position.Y += screenHeight + sprite.GetDimension().Y;
 
                 if (position.X >= screenWidth)
                     position.X -= screenWidth;
                 if (position.X <= 0)
-                    position.X += screenWidth + state.GetSprite().GetDimension().X;
+                    position.X += screenWidth + sprite.GetDimension().X;
             }
         }
 
         private void Die()
         {
-            state = deadState;
+            drawn = false;
         }       
 
         public void SetDeadState(State _deadState)
@@ -88,7 +88,7 @@ namespace Exercice5
         // IMovable
         public void AddVelocity(float _speed)
         {
-            velocity += (new Vector2((float)Math.Cos(state.GetSprite().GetRotation()), (float)Math.Sin(state.GetSprite().GetRotation())) * _speed);
+            velocity += (new Vector2((float)Math.Cos(sprite.GetRotation()), (float)Math.Sin(sprite.GetRotation())) * _speed);
         }
 
         // ICollidable

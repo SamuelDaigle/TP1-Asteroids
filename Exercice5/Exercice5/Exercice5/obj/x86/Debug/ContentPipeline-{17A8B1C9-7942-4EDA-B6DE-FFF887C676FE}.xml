@@ -7,8 +7,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Samuel\Dropbox\Ducktators\Sam &amp; Seb\Exercice5\Exercice5\Exercice5\bin\x86\Debug\Content\Graphics\background.xnb</Output>
-      <Time>2015-08-31T18:54:08-04:00</Time>
+      <Output>C:\Users\Belouga\Desktop\TP1-Asteroids\Exercice5\Exercice5\Exercice5\bin\x86\Debug\Content\Graphics\background.xnb</Output>
+      <Time>2015-09-02T09:25:52.293406-04:00</Time>
     </Item>
     <Item>
       <Source>Graphics\ship.png</Source>
@@ -16,8 +16,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Samuel\Dropbox\Ducktators\Sam &amp; Seb\Exercice5\Exercice5\Exercice5\bin\x86\Debug\Content\Graphics\ship.xnb</Output>
-      <Time>2015-08-31T21:03:02-04:00</Time>
+      <Output>C:\Users\Belouga\Desktop\TP1-Asteroids\Exercice5\Exercice5\Exercice5\bin\x86\Debug\Content\Graphics\ship.xnb</Output>
+      <Time>2015-09-02T09:25:52.2984098-04:00</Time>
     </Item>
     <Item>
       <Source>Graphics\asteroid.png</Source>
@@ -25,8 +25,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Samuel\Dropbox\Ducktators\Sam &amp; Seb\Exercice5\Exercice5\Exercice5\bin\x86\Debug\Content\Graphics\asteroid.xnb</Output>
-      <Time>2015-09-01T08:42:09-04:00</Time>
+      <Output>C:\Users\Belouga\Desktop\TP1-Asteroids\Exercice5\Exercice5\Exercice5\bin\x86\Debug\Content\Graphics\asteroid.xnb</Output>
+      <Time>2015-09-02T09:25:52.2894034-04:00</Time>
     </Item>
     <Item>
       <Source>Graphics\explosion1.png</Source>
@@ -34,8 +34,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Samuel\Dropbox\Ducktators\Sam &amp; Seb\Exercice5\Exercice5\Exercice5\bin\x86\Debug\Content\Graphics\explosion1.xnb</Output>
-      <Time>2015-09-01T10:00:54-04:00</Time>
+      <Output>C:\Users\Belouga\Desktop\TP1-Asteroids\Exercice5\Exercice5\Exercice5\bin\x86\Debug\Content\Graphics\explosion1.xnb</Output>
+      <Time>2015-09-02T09:25:52.296408-04:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -44,10 +44,10 @@
       <TargetProfile>Reach</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Users\Samuel\Dropbox\Ducktators\Sam &amp; Seb\Exercice5\Exercice5\Exercice5Content\</RootDirectory>
-      <LoggerRootDirectory>C:\Users\Samuel\Dropbox\Ducktators\Sam &amp; Seb\Exercice5\Exercice5\Exercice5\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Users\Samuel\Dropbox\Ducktators\Sam &amp; Seb\Exercice5\Exercice5\Exercice5\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Users\Samuel\Dropbox\Ducktators\Sam &amp; Seb\Exercice5\Exercice5\Exercice5\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\Belouga\Desktop\TP1-Asteroids\Exercice5\Exercice5\Exercice5Content\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\Belouga\Desktop\TP1-Asteroids\Exercice5\Exercice5\Exercice5\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\Belouga\Desktop\TP1-Asteroids\Exercice5\Exercice5\Exercice5\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\Belouga\Desktop\TP1-Asteroids\Exercice5\Exercice5\Exercice5\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
@@ -76,7 +76,7 @@
       </Assembly>
       <Assembly>
         <Key>C:\WINDOWS\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2015-08-31T15:45:55.7928141-04:00</Value>
+        <Value>2015-08-24T15:16:38.1621219-04:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>

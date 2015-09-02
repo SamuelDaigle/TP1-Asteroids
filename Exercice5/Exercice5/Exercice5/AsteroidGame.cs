@@ -19,6 +19,7 @@ namespace Exercice5
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Scene scene;
+        BoundingBox screenBox = new BoundingBox();
 
         public AsteroidGame()
         {
@@ -87,19 +88,24 @@ namespace Exercice5
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            scene = new Scene(Content);
+            scene = new Scene();
+
+            //Initialize Screen Border collisions
+            screenBox.Min.X = 0;
+            screenBox.Min.Y = 0;
+            screenBox.Max.X = graphics.GraphicsDevice.Viewport.Width;
+            screenBox.Max.Y = graphics.GraphicsDevice.Viewport.Height;
 
             // Background
             Object2D background = new Object2D();
-            background.Initialize(new AliveState(new Sprite(Content.Load<Texture2D>("Graphics\\background"), 2f)), new Vector2(0, 0));
+            background.Initialize(new Sprite(Content.Load<Texture2D>("Graphics\\background"), 2f), new Vector2(0, 0));
 
             // Player
-            Player.GetInstance().Initialize(new AliveState(new Sprite(Content.Load<Texture2D>("Graphics\\ship"), 0.5f)), new Vector2(500, 300));
-            Player.GetInstance().SetDeadState(new AliveState(new Sprite(Content.Load<Texture2D>("Graphics\\ship"), 1f)));
+            Player.GetInstance().Initialize(new Sprite(Content.Load<Texture2D>("Graphics\\ship"), 0.5f), new Vector2(500, 300));
             
             // Asteroid
             Asteroid asteroid = new Asteroid();
-            asteroid.Initialize(new AliveState(new Sprite(Content.Load<Texture2D>("Graphics\\asteroid"), 0.5f, 2f)), new Vector2(900, 100));
+            asteroid.Initialize(new Sprite(Content.Load<Texture2D>("Graphics\\asteroid"), 0.5f, 2f), new Vector2(900, 100));
             asteroid.AddVelocity(4);
 
 
@@ -125,29 +131,48 @@ namespace Exercice5
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
-        {
-            KeyboardState keyboardState = Keyboard.GetState();
+        {         
 
-            // Allows the game to exit
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
-                this.Exit();
-            if (keyboardState.IsKeyDown(Keys.Escape))
-                this.Exit();
+            HandleInput();
 
-            HandleInput(keyboardState);
-
-            BoundingBox screenBox = new BoundingBox();
-            screenBox.Min.X = 0;
-            screenBox.Min.Y = 0;
-            screenBox.Max.X = graphics.GraphicsDevice.Viewport.Width;
-            screenBox.Max.Y = graphics.GraphicsDevice.Viewport.Height;
             scene.UpdateAll(screenBox);
 
             base.Update(gameTime);
         }
 
-        private void HandleInput(KeyboardState keyboardState)
+        /// <summary>
+        /// This is called when the game should draw itself.
+        /// </summary>
+        /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        protected override void Draw(GameTime gameTime)
         {
+            GraphicsDevice.Clear(Color.CornflowerBlue);
+            spriteBatch.Begin();
+
+            scene.RenderAll(spriteBatch);
+
+            spriteBatch.End();
+            base.Draw(gameTime);
+        }
+
+        private void HandleInput()
+        {
+            if (GamePad.GetState(PlayerIndex.One).IsConnected)
+            {
+                HandleGamePadInput();
+            }
+            else
+            {
+                HandleKeyboardInput();
+            }
+        }
+
+        private void HandleKeyboardInput()
+        {
+            KeyboardState keyboardState = Keyboard.GetState();
+            if (keyboardState.IsKeyDown(Keys.Escape))
+                this.Exit();
+
             if (keyboardState.IsKeyDown(Keys.W))
             {
                 Player.GetInstance().AddVelocity(0.3f);
@@ -166,19 +191,14 @@ namespace Exercice5
             }
         }
 
-        /// <summary>
-        /// This is called when the game should draw itself.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        protected override void Draw(GameTime gameTime)
+        private void HandleGamePadInput()
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-            spriteBatch.Begin();
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
+                this.Exit();
 
-            scene.RenderAll(spriteBatch);
-
-            spriteBatch.End();
-            base.Draw(gameTime);
+            GamePadState padOneState = GamePad.GetState(PlayerIndex.One);
+            Player.GetInstance().AddVelocity(padOneState.ThumbSticks.Left.Y / 3);
+            Player.GetInstance().Rotate(padOneState.ThumbSticks.Left.X / 10);
         }
     }
 }

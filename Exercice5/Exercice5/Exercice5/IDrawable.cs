@@ -15,6 +15,8 @@ namespace Exercice5
 
         Vector2 GetDimension();
 
+        bool IsDrawn();
+
         void Rotate(float angle);
     }
 }

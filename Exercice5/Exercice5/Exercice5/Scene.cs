@@ -14,22 +14,16 @@ namespace Exercice5
 {
     public class Scene
     {
-        private List<Object2D> sprites = new List<Object2D>();
-        private ContentManager content;
+        private List<Object2D> drawableObjects = new List<Object2D>();
 
-        public Scene(ContentManager _content)
+        public void AddDrawableObject(Object2D drawableObject)
         {
-            content = _content;
-        }
-
-        public void AddDrawableObject(Object2D sprite)
-        {
-            sprites.Add(sprite);
+            drawableObjects.Add(drawableObject);
         }
 
         public void UpdateAll(BoundingBox screen)
         {
-            foreach (IMovable sprite in sprites.OfType<IMovable>())
+            foreach (IMovable sprite in drawableObjects.OfType<IMovable>())
             {
                 sprite.UpdateMovement();
                 sprite.StayInBounds(screen);
@@ -40,9 +34,9 @@ namespace Exercice5
 
         private void CheckCollision()
         {
-            foreach (ICollidable collidableObject in sprites.OfType<ICollidable>())
+            foreach (ICollidable collidableObject in drawableObjects.OfType<ICollidable>())
             {
-                foreach (ICollidable other in sprites.OfType<ICollidable>())
+                foreach (ICollidable other in drawableObjects.OfType<ICollidable>())
                 {
                     if (!collidableObject.Equals(other))
                     {
@@ -58,9 +52,10 @@ namespace Exercice5
 
         public void RenderAll(SpriteBatch renderer)
         {
-            foreach (IDrawable drawable in sprites.OfType<IDrawable>())
+            foreach (IDrawable drawable in drawableObjects.OfType<IDrawable>())
             {
-                drawable.Draw(renderer);
+                if(drawable.IsDrawn())
+                    drawable.Draw(renderer);
             }
         }
     }

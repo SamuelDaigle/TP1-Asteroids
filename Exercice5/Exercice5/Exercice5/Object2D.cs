@@ -10,33 +10,41 @@ namespace Exercice5
     public class Object2D : IDrawable
     {
         protected Vector2 position;
-        protected State state;
+        protected Sprite sprite;
+        protected bool drawn = false;
 
-        public void Initialize(State _state, Vector2 _position)
+        public void Initialize(Sprite _sprite, Vector2 _position)
         {
-            state = _state;
+            sprite = _sprite;
             position = _position;
+            drawn = true;
         }
 
         public void Draw(SpriteBatch renderer)
         {
-            state.Draw(renderer, position);
+            sprite.Draw(renderer, position);
         }
 
         public Vector2 GetDimension()
         {
-            return state.GetSprite().GetDimension();
+            return sprite.GetDimension();
         }
 
         public void Rotate(float angle)
         {
-            state.GetSprite().Rotate(angle);
+            sprite.Rotate(angle);
         }
 
         public Vector2 GetPosition()
         {
             return position;
-        }    
+        }
+
+        public bool IsDrawn()
+        {
+            return drawn;
+        }
+
      
 
     }
