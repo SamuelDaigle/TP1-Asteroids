@@ -44,15 +44,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Graphics\asteroid.png">
-      <Name>asteroid</Name>
+    <Compile Include="Graphics\explosion1.png">
+      <Name>explosion1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Graphics\explosion1.png">
-      <Name>explosion1</Name>
+    <Compile Include="Graphics\asteroid.png">
+      <Name>asteroid</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

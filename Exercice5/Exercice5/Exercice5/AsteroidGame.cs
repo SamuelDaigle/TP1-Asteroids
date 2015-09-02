@@ -18,8 +18,9 @@ namespace Exercice5
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Composite scene;
+        Scene scene;
         BoundingBox screenBox = new BoundingBox();
+        GamePadState oldGamePadState;
 
         public AsteroidGame()
         {
@@ -35,7 +36,7 @@ namespace Exercice5
         /// </summary>
         protected override void Initialize()
         {
-            InitGraphicsMode(800, 400, false);
+            InitGraphicsMode(1024, 768, false);
             base.Initialize();
         }
 
@@ -88,7 +89,7 @@ namespace Exercice5
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            scene = new Composite();
+            scene = new Scene();
 
             //Initialize Screen Border collisions
             screenBox.Min.X = 0;
@@ -96,23 +97,16 @@ namespace Exercice5
             screenBox.Max.X = graphics.GraphicsDevice.Viewport.Width;
             screenBox.Max.Y = graphics.GraphicsDevice.Viewport.Height;
 
-            // Background
-            Object2D background = new Object2D();
-            background.Initialize(new Sprite(Content.Load<Texture2D>("Graphics\\background"), 2f), new Vector2(0, 0));
-
             // Player
-            Player.GetInstance().Initialize(new Sprite(Content.Load<Texture2D>("Graphics\\ship"), 0.5f), new Vector2(500, 300));
-            
+            Player.GetInstance().Initialize(new Sprite(Content.Load<Texture2D>("Graphics\\ship"), 0.3f), new Vector2(500, 300), new Sprite(Content.Load<Texture2D>("Graphics\\ship"), 0.05f));
+
             // Asteroid
-            Asteroid asteroid = new Asteroid();
-            asteroid.Initialize(new Sprite(Content.Load<Texture2D>("Graphics\\asteroid"), 0.5f, 2f), new Vector2(900, 100), Asteroid.Size.LARGE);
-            asteroid.AddVelocity(4);
+            //Composite asteroid = NewAsteroid();
 
 
             // Add all previous objects to scene.
-            scene.AddDrawableObject(background);
             scene.AddDrawableObject(Player.GetInstance());
-            scene.AddDrawableObject(asteroid);
+            //scene.AddDrawableObject(asteroid);
         }
 
 
@@ -131,7 +125,7 @@ namespace Exercice5
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
-        {         
+        {
 
             HandleInput();
 
@@ -149,7 +143,8 @@ namespace Exercice5
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
 
-            scene.RenderAll(spriteBatch);
+            spriteBatch.Draw(Content.Load<Texture2D>("Graphics\\background"), Vector2.Zero, null, Color.White, 0f, Vector2.Zero, 2.0f, SpriteEffects.None, 0f);
+            scene.Draw(spriteBatch);
 
             spriteBatch.End();
             base.Draw(gameTime);
@@ -197,8 +192,41 @@ namespace Exercice5
                 this.Exit();
 
             GamePadState padOneState = GamePad.GetState(PlayerIndex.One);
-            Player.GetInstance().AddVelocity(padOneState.ThumbSticks.Left.Y / 3);
+            Player.GetInstance().AddVelocity(padOneState.ThumbSticks.Left.Y);
             Player.GetInstance().Rotate(padOneState.ThumbSticks.Left.X / 10);
+
+            if (padOneState.IsButtonDown(Buttons.A) && oldGamePadState.IsButtonUp(Buttons.A))
+            {
+                scene.AddDrawableObject(Player.GetInstance().Shoot());
+            }
+            oldGamePadState = padOneState;
+        }
+
+        private Composite NewAsteroid()
+        {
+            Composite asteroid = new Composite();
+            Vector2 position = new Vector2(100, 100);
+
+            asteroid.AddDrawableObject(createAsteroid(position, Asteroid.Size.SMALL));
+            asteroid.AddDrawableObject(createAsteroid(position, Asteroid.Size.SMALL));
+            asteroid.AddDrawableObject(createAsteroid(position, Asteroid.Size.SMALL));
+            asteroid.AddDrawableObject(createAsteroid(position, Asteroid.Size.SMALL));
+            asteroid.AddDrawableObject(createAsteroid(position, Asteroid.Size.MEDIUM));
+            asteroid.AddDrawableObject(createAsteroid(position, Asteroid.Size.MEDIUM));
+            asteroid.AddDrawableObject(createAsteroid(position, Asteroid.Size.LARGE));
+
+            return asteroid;
+        }
+
+        private Asteroid createAsteroid(Vector2 _position, Asteroid.Size _size)
+        {
+            Texture2D image = Content.Load<Texture2D>("Graphics\\asteroid");
+
+            Asteroid asteroid = new Asteroid();
+            asteroid.Initialize(new Sprite(image, 0.5f, 2f), _position, _size);
+            asteroid.AddVelocity(3f);
+
+            return asteroid;
         }
     }
 }

@@ -3,38 +3,56 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 
 namespace Exercice5
 {
-    public class Asteroid : Object2D, IMovable
+    public class Bullet : Object2D, IMovable
     {
         private Vector2 velocity;
-        private BoundingSphere collisionBox;
-        private Size size = Size.LARGE;
+        private BoundingSphere collisionSphere;
+        private DateTime birth;
+        private TimeSpan lifeTime;
 
-        public enum Size { SMALL, MEDIUM, LARGE };
-
-        public void Initialize(Sprite _sprite, Vector2 _position, Size _size)
+        public Vector2 Position
         {
-            base.Initialize(_sprite, _position);
-            size = _size;
+            set
+            {
+                position = value;
+            }
+        }
+
+        public float Rotation
+        {
+            set
+            {
+                sprite.Rotation = value;
+            }
+        }
+
+        public Bullet()
+        {
+            lifeTime = new TimeSpan(0,0,1);
         }
 
         // IMovable
         public void UpdateMovement()
         {
+            if(DateTime.Now - birth >= lifeTime)
+            {
+                drawn = false;
+            }
+
             position.X += (int)(velocity.X);
             position.Y += (int)(velocity.Y);
 
-            collisionBox.Radius = GetDimension().X / 2;
-            collisionBox.Center.X = position.X + GetDimension().X / 2;
-            collisionBox.Center.Y = position.Y + GetDimension().Y / 2;
+            collisionSphere.Radius = GetDimension().X / 2;
+            collisionSphere.Center.X = position.X + GetDimension().X / 2;
+            collisionSphere.Center.Y = position.Y + GetDimension().Y / 2;
         }
 
         public void StayInBounds(BoundingBox screen)
         {
-            if (!collisionBox.Intersects(screen))
+            if (!collisionSphere.Intersects(screen))
             {
                 float screenHeight = screen.Max.Y - screen.Min.Y;
                 float screenWidth = screen.Max.X - screen.Min.X;
@@ -51,6 +69,13 @@ namespace Exercice5
             }
         }
 
+        public void Reset()
+        {
+            velocity.X = 0;
+            velocity.Y = 0;
+            drawn = true;
+        }
+
         public void AddVelocity(float _speed)
         {
             velocity += (new Vector2((float)Math.Cos(sprite.Rotation), (float)Math.Sin(sprite.Rotation)) * _speed);
@@ -60,6 +85,10 @@ namespace Exercice5
         {
             drawn = false;
         }
-    }
 
+        public void StartTimer()
+        {
+            birth = DateTime.Now;
+        }
+    }
 }

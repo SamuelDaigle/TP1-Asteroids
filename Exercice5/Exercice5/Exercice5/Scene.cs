@@ -7,14 +7,12 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Exercice5
 {
-    class Composite : Asteroid
+    public class Scene
     {
-        private Asteroid mainAsteroid;
         private List<Object2D> drawableObjects = new List<Object2D>();
 
         public void AddDrawableObject(Object2D drawableObject)
         {
-            drawn = true;
             bool found = false;
             foreach (Object2D drawable in drawableObjects)
             {
@@ -58,21 +56,13 @@ namespace Exercice5
             }
         }
 
-        public override void Draw(SpriteBatch renderer)
+        public void Draw(SpriteBatch renderer)
         {
-            if (drawn)
+            foreach (IDrawable drawable in drawableObjects.OfType<IDrawable>())
             {
-                foreach (IDrawable drawable in drawableObjects.OfType<IDrawable>())
-                {
-                    drawable.Draw(renderer);
-                }
+                drawable.Draw(renderer);
             }
-        }
 
-
-        public override void Terminate()
-        {
-            drawn = false;
         }
     }
 }

@@ -13,6 +13,17 @@ namespace Exercice5
         protected float rotation;
         protected float scale;
         
+        public float Rotation
+        {
+            get
+            {
+                return rotation;
+            }
+            set
+            {
+                rotation = value;
+            }
+        }
 
         public Sprite(Texture2D _image, float _scale = 1.0f, float _rotation = 0.0f)
         {
@@ -34,16 +45,6 @@ namespace Exercice5
         public Vector2 GetDimension()
         {
             return new Vector2(image.Width * scale, image.Height * scale);
-        }
-
-        public void SetScale(float _scale)
-        {
-            scale = _scale;
-        }
-
-        public float GetRotation()
-        {
-            return rotation;
         }
     }
 }

@@ -16,6 +16,6 @@ namespace Exercice5
     {
         BoundingSphere GetCollision();
 
-        void HasCollided();
+        void Terminate();
     }
 }

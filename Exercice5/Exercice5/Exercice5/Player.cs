@@ -7,12 +7,14 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Exercice5
 {
-    public class Player : Object2D, IMovable, ICollidable
+    public class Player : Object2D, IMovable
     {
         private static Player instance = null;
         private Vector2 velocity;
         private BoundingSphere collisionBox;
         private State deadState;
+        private Queue<Bullet> bullets;
+        private readonly float MAX_VELOCITY = 7f;
 
         public static Player GetInstance()
         {
@@ -26,15 +28,30 @@ namespace Exercice5
 
         private Player()
         {
+            bullets = new Queue<Bullet>();
+        }
+
+        public void Initialize(Sprite _sprite, Vector2 _position, Sprite _bulletSprite)
+        {
+            base.Initialize(_sprite, _position);
+            for(int i = 0; i < 15; i++)
+            {
+                Bullet bullet = new Bullet();
+                bullet.Initialize(_bulletSprite, position);
+                bullet.AddVelocity(5f);
+                bullets.Enqueue(bullet);
+            }
         }
 
         //*************************//
 
         
 
-        public void UpdateMovement()
+        public void UpdateMovement()  
         {
-            NormalizeVelocity();
+            double currentSpeed = GetSpeed();
+
+            FixMaximumVelocity(currentSpeed);
 
             position.X += (int)(velocity.X);
             position.Y += (int)(velocity.Y);
@@ -44,16 +61,14 @@ namespace Exercice5
             collisionBox.Center.Y = position.Y + GetDimension().Y / 2;
         }
 
-        private void NormalizeVelocity()
+        private void FixMaximumVelocity(double _speed)
         {
-            if (velocity.X > 10)
-                velocity.X = 10;
-            if (velocity.Y > 10)
-                velocity.Y = 10;
-            if (velocity.X < -10)
-                velocity.X = -10;
-            if (velocity.Y < -10)
-                velocity.Y = -10;
+            if (_speed > MAX_VELOCITY)
+            {
+                float ratio = (float)(MAX_VELOCITY / _speed);
+                velocity.X *= ratio;
+                velocity.Y *= ratio;
+            }
         }
 
         public void StayInBounds(BoundingBox screen)
@@ -75,11 +90,6 @@ namespace Exercice5
             }
         }
 
-        private void Die()
-        {
-            drawn = false;
-        }       
-
         public void SetDeadState(State _deadState)
         {
             deadState = _deadState;
@@ -88,18 +98,33 @@ namespace Exercice5
         // IMovable
         public void AddVelocity(float _speed)
         {
-            velocity += (new Vector2((float)Math.Cos(sprite.GetRotation()), (float)Math.Sin(sprite.GetRotation())) * _speed);
+            if (_speed < 0)
+                velocity /= 2;
+            velocity += (new Vector2((float)Math.Cos(sprite.Rotation), (float)Math.Sin(sprite.Rotation)) * _speed);
         }
 
-        // ICollidable
-        public BoundingSphere GetCollision()
+        public override void Terminate()
         {
-            return collisionBox;
+            drawn = false;
         }
 
-        public void HasCollided()
+        private double GetSpeed()
         {
-            Die();
+            return Math.Sqrt((double)(velocity.X * velocity.X + velocity.Y * velocity.Y));
+        }
+
+        public Bullet Shoot()
+        {
+            
+                Bullet thrownBullet = bullets.Dequeue();
+                thrownBullet.Reset();
+                thrownBullet.Position = position;
+                thrownBullet.Rotation = Rotation;
+                thrownBullet.AddVelocity(11f);
+                thrownBullet.StartTimer();
+                bullets.Enqueue(thrownBullet);
+            
+            return thrownBullet;
         }
     }
 
