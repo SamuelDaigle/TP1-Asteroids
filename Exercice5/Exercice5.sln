@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exercice5", "Exercice5\Exercice5\Exercice5.csproj", "{BAB7CCC7-D97D-48CA-B8FB-DE61DD4D9997}"
+EndProject
+Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "Exercice5Content", "Exercice5\Exercice5Content\Exercice5Content.contentproj", "{17A8B1C9-7942-4EDA-B6DE-FFF887C676FE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BAB7CCC7-D97D-48CA-B8FB-DE61DD4D9997}.Debug|x86.ActiveCfg = Debug|x86
+		{BAB7CCC7-D97D-48CA-B8FB-DE61DD4D9997}.Debug|x86.Build.0 = Debug|x86
+		{BAB7CCC7-D97D-48CA-B8FB-DE61DD4D9997}.Release|x86.ActiveCfg = Release|x86
+		{BAB7CCC7-D97D-48CA-B8FB-DE61DD4D9997}.Release|x86.Build.0 = Release|x86
+		{17A8B1C9-7942-4EDA-B6DE-FFF887C676FE}.Debug|x86.ActiveCfg = Debug|x86
+		{17A8B1C9-7942-4EDA-B6DE-FFF887C676FE}.Release|x86.ActiveCfg = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,34 @@
+D:\École\Session 5\Programmation objet avancee en jeux video\Pratique\Exercice5\Exercice5\Exercice5\bin\x86\Debug\Content\Graphics\background.xnb
+D:\École\Session 5\Programmation objet avancee en jeux video\Pratique\Exercice5\Exercice5\Exercice5\bin\x86\Debug\Content\Graphics\ship.xnb
+D:\École\Session 5\Programmation objet avancee en jeux video\Pratique\Exercice5\Exercice5\Exercice5\bin\x86\Debug\Content\Graphics\asteroid.xnb
+D:\École\Session 5\Programmation objet avancee en jeux video\Pratique\Exercice5\Exercice5\Exercice5\bin\x86\Debug\Content\Graphics\explosion1.xnb
+D:\École\Session 5\Programmation objet avancee en jeux video\Pratique\Exercice5\Exercice5\Exercice5\bin\x86\Debug\Exercice5.exe
+D:\École\Session 5\Programmation objet avancee en jeux video\Pratique\Exercice5\Exercice5\Exercice5\bin\x86\Debug\Exercice5.pdb
+D:\École\Session 5\Programmation objet avancee en jeux video\Pratique\Exercice5\Exercice5\Exercice5\obj\x86\Debug\Exercice5.csprojResolveAssemblyReference.cache
+D:\École\Session 5\Programmation objet avancee en jeux video\Pratique\Exercice5\Exercice5\Exercice5\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+D:\École\Session 5\Programmation objet avancee en jeux video\Pratique\Exercice5\Exercice5\Exercice5\obj\x86\Debug\Exercice5.exe
+D:\École\Session 5\Programmation objet avancee en jeux video\Pratique\Exercice5\Exercice5\Exercice5\obj\x86\Debug\Exercice5.pdb
+C:\Users\Samuel\Dropbox\Ducktators\Sam & Seb\Exercice5\Exercice5\Exercice5\obj\x86\Debug\Exercice5.csprojResolveAssemblyReference.cache
+C:\Users\Samuel\Dropbox\Ducktators\Sam & Seb\Exercice5\Exercice5\Exercice5\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Samuel\Dropbox\Ducktators\Sam & Seb\Exercice5\Exercice5\Exercice5\obj\x86\Debug\Exercice5.exe
+C:\Users\Samuel\Dropbox\Ducktators\Sam & Seb\Exercice5\Exercice5\Exercice5\obj\x86\Debug\Exercice5.pdb
+C:\Users\Samuel\Dropbox\Ducktators\Sam & Seb\Exercice5\Exercice5\Exercice5\bin\x86\Debug\Content\Graphics\background.xnb
+C:\Users\Samuel\Dropbox\Ducktators\Sam & Seb\Exercice5\Exercice5\Exercice5\bin\x86\Debug\Content\Graphics\ship.xnb
+C:\Users\Samuel\Dropbox\Ducktators\Sam & Seb\Exercice5\Exercice5\Exercice5\bin\x86\Debug\Content\Graphics\asteroid.xnb
+C:\Users\Samuel\Dropbox\Ducktators\Sam & Seb\Exercice5\Exercice5\Exercice5\bin\x86\Debug\Content\Graphics\explosion1.xnb
+C:\Users\Samuel\Dropbox\Ducktators\Sam & Seb\Exercice5\Exercice5\Exercice5\bin\x86\Debug\Exercice5.exe
+C:\Users\Samuel\Dropbox\Ducktators\Sam & Seb\Exercice5\Exercice5\Exercice5\bin\x86\Debug\Exercice5.pdb
+C:\Users\Belouga\Dropbox\ducktators\Sam & Seb\Exercice5\Exercice5\Exercice5\bin\x86\Debug\Content\Graphics\background.xnb
+C:\Users\Belouga\Dropbox\ducktators\Sam & Seb\Exercice5\Exercice5\Exercice5\bin\x86\Debug\Content\Graphics\ship.xnb
+C:\Users\Belouga\Dropbox\ducktators\Sam & Seb\Exercice5\Exercice5\Exercice5\bin\x86\Debug\Content\Graphics\asteroid.xnb
+C:\Users\Belouga\Dropbox\ducktators\Sam & Seb\Exercice5\Exercice5\Exercice5\bin\x86\Debug\Content\Graphics\explosion1.xnb
+C:\Users\Belouga\Dropbox\ducktators\Sam & Seb\Exercice5\Exercice5\Exercice5\bin\x86\Debug\Exercice5.exe
+C:\Users\Belouga\Dropbox\ducktators\Sam & Seb\Exercice5\Exercice5\Exercice5\bin\x86\Debug\Exercice5.pdb
+C:\Users\Belouga\Dropbox\ducktators\Sam & Seb\Exercice5\Exercice5\Exercice5\obj\x86\Debug\Exercice5.csprojResolveAssemblyReference.cache
+C:\Users\Belouga\Dropbox\ducktators\Sam & Seb\Exercice5\Exercice5\Exercice5\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Belouga\Dropbox\ducktators\Sam & Seb\Exercice5\Exercice5\Exercice5\obj\x86\Debug\Exercice5.exe
+C:\Users\Belouga\Dropbox\ducktators\Sam & Seb\Exercice5\Exercice5\Exercice5\obj\x86\Debug\Exercice5.pdb
+C:\Users\Belouga\Dropbox\ducktators\Sam & Seb\Exercice5\Exercice5\Exercice5\bin\x86\Debug\background.xnb
+C:\Users\Belouga\Dropbox\ducktators\Sam & Seb\Exercice5\Exercice5\Exercice5\bin\x86\Debug\ship.xnb
+C:\Users\Belouga\Dropbox\ducktators\Sam & Seb\Exercice5\Exercice5\Exercice5\bin\x86\Debug\asteroid.xnb
+C:\Users\Belouga\Dropbox\ducktators\Sam & Seb\Exercice5\Exercice5\Exercice5\bin\x86\Debug\explosion1.xnb

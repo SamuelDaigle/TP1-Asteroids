@@ -1,0 +1,3 @@
+D:\École\Session 5\Programmation objet avancee en jeux video\Pratique\Exercice5\Exercice5\Exercice5Content\obj\x86\Debug\Exercice5Content.contentprojResolveAssemblyReference.cache
+C:\Users\Samuel\Dropbox\Ducktators\Sam & Seb\Exercice5\Exercice5\Exercice5Content\obj\x86\Debug\Exercice5Content.contentprojResolveAssemblyReference.cache
+C:\Users\Belouga\Dropbox\ducktators\Sam & Seb\Exercice5\Exercice5\Exercice5Content\obj\x86\Debug\Exercice5Content.contentprojResolveAssemblyReference.cache
