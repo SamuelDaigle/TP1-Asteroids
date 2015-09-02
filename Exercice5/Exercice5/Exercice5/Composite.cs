@@ -3,16 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
 
 namespace Exercice5
 {
-    public class Scene
+    class Composite : Object2D
     {
         private List<Object2D> drawableObjects = new List<Object2D>();
 
@@ -54,7 +49,7 @@ namespace Exercice5
         {
             foreach (IDrawable drawable in drawableObjects.OfType<IDrawable>())
             {
-                if(drawable.IsDrawn())
+                if (drawable.IsDrawn())
                     drawable.Draw(renderer);
             }
         }

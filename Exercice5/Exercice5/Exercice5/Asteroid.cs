@@ -11,6 +11,15 @@ namespace Exercice5
     {
         private Vector2 velocity;
         private BoundingSphere collisionBox;
+        private Size size = Size.LARGE;
+
+        public enum Size {SMALL, MEDIUM, LARGE};
+
+        public void Initialize(Sprite _sprite, Vector2 _position, Size _size)
+        {
+            base.Initialize(_sprite, _position);
+            size = _size;
+        }
 
         public void UpdateMovement()
         {
@@ -41,10 +50,6 @@ namespace Exercice5
             }
         }
 
-        private void Die()
-        {
-        }
-
         // IMovable
         public void AddVelocity(float _speed)
         {
@@ -59,7 +64,7 @@ namespace Exercice5
 
         public void HasCollided()
         {
-            Die();
+            
         }
     }
 

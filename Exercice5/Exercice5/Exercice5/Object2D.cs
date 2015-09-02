@@ -13,14 +13,14 @@ namespace Exercice5
         protected Sprite sprite;
         protected bool drawn = false;
 
-        public void Initialize(Sprite _sprite, Vector2 _position)
+        public virtual void Initialize(Sprite _sprite, Vector2 _position)
         {
             sprite = _sprite;
             position = _position;
             drawn = true;
         }
 
-        public void Draw(SpriteBatch renderer)
+        public virtual void Draw(SpriteBatch renderer)
         {
             sprite.Draw(renderer, position);
         }

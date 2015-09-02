@@ -18,7 +18,7 @@ namespace Exercice5
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Scene scene;
+        Composite scene;
         BoundingBox screenBox = new BoundingBox();
 
         public AsteroidGame()
@@ -35,7 +35,7 @@ namespace Exercice5
         /// </summary>
         protected override void Initialize()
         {
-            InitGraphicsMode(800, 400, true);
+            InitGraphicsMode(800, 400, false);
             base.Initialize();
         }
 
@@ -88,7 +88,7 @@ namespace Exercice5
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            scene = new Scene();
+            scene = new Composite();
 
             //Initialize Screen Border collisions
             screenBox.Min.X = 0;
@@ -105,7 +105,7 @@ namespace Exercice5
             
             // Asteroid
             Asteroid asteroid = new Asteroid();
-            asteroid.Initialize(new Sprite(Content.Load<Texture2D>("Graphics\\asteroid"), 0.5f, 2f), new Vector2(900, 100));
+            asteroid.Initialize(new Sprite(Content.Load<Texture2D>("Graphics\\asteroid"), 0.5f, 2f), new Vector2(900, 100), Asteroid.Size.LARGE);
             asteroid.AddVelocity(4);
 
 
