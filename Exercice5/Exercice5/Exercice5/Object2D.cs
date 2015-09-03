@@ -9,7 +9,7 @@ namespace Exercice5
 {
     public class Object2D : IDrawable, ICollidable
     {
-        protected BoundingSphere collidingSphere;
+        protected BoundingSphere collisionSphere;
         protected Vector2 position;
         protected Sprite sprite;
         protected bool drawn = false;
@@ -35,7 +35,7 @@ namespace Exercice5
             sprite = _sprite;
             position = _position;
             drawn = true;
-            collidingSphere = new BoundingSphere(new Vector3(_position,0), _sprite.GetDimension().X / 2);
+            collisionSphere = new BoundingSphere(new Vector3(_position,0), _sprite.GetDimension().X / 2);
         }
 
         public virtual void Draw(SpriteBatch renderer)
@@ -63,16 +63,18 @@ namespace Exercice5
         {
             return drawn;
         }
-        public BoundingSphere GetCollision()
+
+        public virtual BoundingSphere GetCollision()
         {
-            return collidingSphere;
+            return collisionSphere;
         }
 
         public virtual void Terminate() 
         {
             drawn = false;
+            position.X = 0;
+            position.Y = 0;
         }
-     
 
     }
 }

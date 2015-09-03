@@ -7,10 +7,15 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Exercice5
 {
-    class Composite : Asteroid
+    class Composite : ExplodableObject
     {
-        private Asteroid mainAsteroid;
+        private Object2D mainAsteroid;
         private List<Object2D> drawableObjects = new List<Object2D>();
+
+        public void SetMainObject(Object2D _object)
+        {
+            mainAsteroid = _object;
+        }
 
         public void AddDrawableObject(Object2D drawableObject)
         {
@@ -29,12 +34,11 @@ namespace Exercice5
                 drawableObjects.Add(drawableObject);
         }
 
-        public void UpdateAll(BoundingBox screen)
+        public void Update(BoundingBox screen)
         {
             foreach (IMovable sprite in drawableObjects.OfType<IMovable>())
             {
-                sprite.UpdateMovement();
-                sprite.StayInBounds(screen);
+                sprite.Update(screen);
             }
 
             CheckCollision();
@@ -60,19 +64,32 @@ namespace Exercice5
 
         public override void Draw(SpriteBatch renderer)
         {
-            if (drawn)
+            foreach (IDrawable drawable in drawableObjects.OfType<IDrawable>())
             {
-                foreach (IDrawable drawable in drawableObjects.OfType<IDrawable>())
-                {
-                    drawable.Draw(renderer);
-                }
+                drawable.Draw(renderer);
+            }
+
+            if (mainAsteroid.IsDrawn())
+            {
+                mainAsteroid.Draw(renderer);
             }
         }
 
 
         public override void Terminate()
         {
+            Explode();
+        }
+
+        public override void Explode()
+        {
+            mainAsteroid.Terminate();
             drawn = false;
+        }
+
+        public override BoundingSphere GetCollision()
+        {
+            return mainAsteroid.GetCollision();
         }
     }
 }
