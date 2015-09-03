@@ -7,10 +7,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Exercice5
 {
-    public class Asteroid : Object2D, IMovable
+    public class Asteroid : ExplodableObject, IMovable
     {
         private Vector2 velocity;
-        private BoundingSphere collisionBox;
         private Size size = Size.LARGE;
 
         public enum Size { SMALL, MEDIUM, LARGE };
@@ -19,22 +18,34 @@ namespace Exercice5
         {
             base.Initialize(_sprite, _position);
             size = _size;
+
+            if (_size == Size.SMALL)
+            {
+                _sprite.Scale = 0.3f;
+            }
+            else if (_size == Size.MEDIUM)
+            {
+                _sprite.Scale = 0.6f;
+            }
         }
 
         // IMovable
-        public void UpdateMovement()
+        public void Update(BoundingBox screen)
         {
             position.X += (int)(velocity.X);
             position.Y += (int)(velocity.Y);
 
-            collisionBox.Radius = GetDimension().X / 2;
-            collisionBox.Center.X = position.X + GetDimension().X / 2;
-            collisionBox.Center.Y = position.Y + GetDimension().Y / 2;
+            collisionSphere.Radius = GetDimension().X / 2;
+            collisionSphere.Center.X = position.X + collisionSphere.Radius;
+            collisionSphere.Center.Y = position.Y + collisionSphere.Radius;
+
+            StayInBounds(screen);
         }
 
-        public void StayInBounds(BoundingBox screen)
+        private void StayInBounds(BoundingBox screen)
         {
-            if (!collisionBox.Intersects(screen))
+
+            if (!collisionSphere.Intersects(screen))
             {
                 float screenHeight = screen.Max.Y - screen.Min.Y;
                 float screenWidth = screen.Max.X - screen.Min.X;
@@ -58,7 +69,14 @@ namespace Exercice5
 
         public override void Terminate()
         {
+            Explode();
+        }
+
+        public override void Explode()
+        {
             drawn = false;
+            position.X = 0;
+            position.Y = 0;
         }
     }
 

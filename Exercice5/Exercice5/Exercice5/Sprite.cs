@@ -25,6 +25,18 @@ namespace Exercice5
             }
         }
 
+        public float Scale
+        {
+            get
+            {
+                return scale;
+            }
+            set
+            {
+                scale = value;
+            }
+        }
+
         public Sprite(Texture2D _image, float _scale = 1.0f, float _rotation = 0.0f)
         {
             image = _image;

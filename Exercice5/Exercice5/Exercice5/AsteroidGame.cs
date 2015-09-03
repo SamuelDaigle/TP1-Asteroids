@@ -101,12 +101,12 @@ namespace Exercice5
             Player.GetInstance().Initialize(new Sprite(Content.Load<Texture2D>("Graphics\\ship"), 0.3f), new Vector2(500, 300), new Sprite(Content.Load<Texture2D>("Graphics\\ship"), 0.05f));
 
             // Asteroid
-            //Composite asteroid = NewAsteroid();
+            Composite asteroid = NewAsteroid();
 
 
             // Add all previous objects to scene.
             scene.AddDrawableObject(Player.GetInstance());
-            //scene.AddDrawableObject(asteroid);
+            scene.AddDrawableObject(asteroid);
         }
 
 
@@ -129,7 +129,7 @@ namespace Exercice5
 
             HandleInput();
 
-            scene.UpdateAll(screenBox);
+            scene.Update(screenBox);
 
             base.Update(gameTime);
         }
@@ -184,6 +184,10 @@ namespace Exercice5
             {
                 Player.GetInstance().Rotate(-0.1f);
             }
+            if (keyboardState.IsKeyDown(Keys.Space))
+            {
+                scene.AddDrawableObject(Player.GetInstance().Shoot());
+            }
         }
 
         private void HandleGamePadInput()
@@ -205,7 +209,7 @@ namespace Exercice5
         private Composite NewAsteroid()
         {
             Composite asteroid = new Composite();
-            Vector2 position = new Vector2(100, 100);
+            Vector2 position = new Vector2(200, 400);
 
             asteroid.AddDrawableObject(createAsteroid(position, Asteroid.Size.SMALL));
             asteroid.AddDrawableObject(createAsteroid(position, Asteroid.Size.SMALL));
@@ -213,7 +217,7 @@ namespace Exercice5
             asteroid.AddDrawableObject(createAsteroid(position, Asteroid.Size.SMALL));
             asteroid.AddDrawableObject(createAsteroid(position, Asteroid.Size.MEDIUM));
             asteroid.AddDrawableObject(createAsteroid(position, Asteroid.Size.MEDIUM));
-            asteroid.AddDrawableObject(createAsteroid(position, Asteroid.Size.LARGE));
+            asteroid.SetMainObject(createAsteroid(position, Asteroid.Size.LARGE));
 
             return asteroid;
         }
@@ -223,7 +227,7 @@ namespace Exercice5
             Texture2D image = Content.Load<Texture2D>("Graphics\\asteroid");
 
             Asteroid asteroid = new Asteroid();
-            asteroid.Initialize(new Sprite(image, 0.5f, 2f), _position, _size);
+            asteroid.Initialize(new Sprite(image, 1f, 2f), _position, _size);
             asteroid.AddVelocity(3f);
 
             return asteroid;

@@ -10,8 +10,6 @@ namespace Exercice5
     {
         void AddVelocity(float _speed);
 
-        void UpdateMovement();
-
-        void StayInBounds(BoundingBox screen);
+        void Update(BoundingBox screen);
     }
 }

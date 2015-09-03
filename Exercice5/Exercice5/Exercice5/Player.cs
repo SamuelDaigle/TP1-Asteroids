@@ -11,8 +11,6 @@ namespace Exercice5
     {
         private static Player instance = null;
         private Vector2 velocity;
-        private BoundingSphere collisionBox;
-        private State deadState;
         private Queue<Bullet> bullets;
         private readonly float MAX_VELOCITY = 7f;
 
@@ -45,9 +43,9 @@ namespace Exercice5
 
         //*************************//
 
-        
 
-        public void UpdateMovement()  
+
+        public void Update(BoundingBox screen)  
         {
             double currentSpeed = GetSpeed();
 
@@ -56,9 +54,11 @@ namespace Exercice5
             position.X += (int)(velocity.X);
             position.Y += (int)(velocity.Y);
 
-            collisionBox.Radius = GetDimension().X / 2;
-            collisionBox.Center.X = position.X + GetDimension().X / 2;
-            collisionBox.Center.Y = position.Y + GetDimension().Y / 2;
+            collisionSphere.Radius = GetDimension().X / 2;
+            collisionSphere.Center.X = position.X + GetDimension().X / 2;
+            collisionSphere.Center.Y = position.Y + GetDimension().Y / 2;
+
+            StayInBounds(screen);
         }
 
         private void FixMaximumVelocity(double _speed)
@@ -71,9 +71,9 @@ namespace Exercice5
             }
         }
 
-        public void StayInBounds(BoundingBox screen)
+        private void StayInBounds(BoundingBox screen)
         {
-            if (!collisionBox.Intersects(screen))
+            if (!collisionSphere.Intersects(screen))
             {
                 float screenHeight = screen.Max.Y - screen.Min.Y;
                 float screenWidth = screen.Max.X - screen.Min.X;
@@ -90,11 +90,6 @@ namespace Exercice5
             }
         }
 
-        public void SetDeadState(State _deadState)
-        {
-            deadState = _deadState;
-        }
-
         // IMovable
         public void AddVelocity(float _speed)
         {
@@ -106,6 +101,8 @@ namespace Exercice5
         public override void Terminate()
         {
             drawn = false;
+            position.X = 0;
+            position.Y = 0;
         }
 
         private double GetSpeed()

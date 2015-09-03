@@ -35,7 +35,7 @@ namespace Exercice5
         }
 
         // IMovable
-        public void UpdateMovement()
+        public void Update(BoundingBox screen)
         {
             if(DateTime.Now - birth >= lifeTime)
             {
@@ -48,9 +48,11 @@ namespace Exercice5
             collisionSphere.Radius = GetDimension().X / 2;
             collisionSphere.Center.X = position.X + GetDimension().X / 2;
             collisionSphere.Center.Y = position.Y + GetDimension().Y / 2;
+
+            StayInBounds(screen);
         }
 
-        public void StayInBounds(BoundingBox screen)
+        private void StayInBounds(BoundingBox screen)
         {
             if (!collisionSphere.Intersects(screen))
             {

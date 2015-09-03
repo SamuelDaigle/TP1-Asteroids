@@ -27,12 +27,11 @@ namespace Exercice5
                 drawableObjects.Add(drawableObject);
         }
 
-        public void UpdateAll(BoundingBox screen)
+        public void Update(BoundingBox screen)
         {
             foreach (IMovable sprite in drawableObjects.OfType<IMovable>())
             {
-                sprite.UpdateMovement();
-                sprite.StayInBounds(screen);
+                sprite.Update(screen);
             }
 
             CheckCollision();
