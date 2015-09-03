@@ -5,8 +5,8 @@ using System.Text;
 
 namespace Exercice5
 {
-    public abstract class ExplodableObject : Object2D
+    public interface ExplodableObject
     {
-        public abstract void Explode();
+        void Explode();
     }
 }

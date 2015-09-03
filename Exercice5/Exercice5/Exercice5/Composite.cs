@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Exercice5
 {
-    class Composite : ExplodableObject
+    class Composite : Object2D, ExplodableObject
     {
         private Object2D mainAsteroid;
         private List<Object2D> drawableObjects = new List<Object2D>();
@@ -81,7 +81,7 @@ namespace Exercice5
             Explode();
         }
 
-        public override void Explode()
+        public void Explode()
         {
             mainAsteroid.Terminate();
             drawn = false;

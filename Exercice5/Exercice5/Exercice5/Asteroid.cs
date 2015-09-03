@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Exercice5
 {
-    public class Asteroid : ExplodableObject, IMovable
+    public class Asteroid : Object2D, ExplodableObject, IMovable
     {
         private Vector2 velocity;
         private Size size = Size.LARGE;
@@ -72,7 +72,7 @@ namespace Exercice5
             Explode();
         }
 
-        public override void Explode()
+        public void Explode()
         {
             drawn = false;
             position.X = 0;

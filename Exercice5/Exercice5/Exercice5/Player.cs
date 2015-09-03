@@ -32,7 +32,7 @@ namespace Exercice5
         public void Initialize(Sprite _sprite, Vector2 _position, Sprite _bulletSprite)
         {
             base.Initialize(_sprite, _position);
-            for(int i = 0; i < 15; i++)
+            for (int i = 0; i < 15; i++)
             {
                 Bullet bullet = new Bullet();
                 bullet.Initialize(_bulletSprite, position);
@@ -45,7 +45,7 @@ namespace Exercice5
 
 
 
-        public void Update(BoundingBox screen)  
+        public void Update(BoundingBox screen)
         {
             double currentSpeed = GetSpeed();
 
@@ -112,15 +112,15 @@ namespace Exercice5
 
         public Bullet Shoot()
         {
-            
-                Bullet thrownBullet = bullets.Dequeue();
-                thrownBullet.Reset();
-                thrownBullet.Position = position;
-                thrownBullet.Rotation = Rotation;
-                thrownBullet.AddVelocity(11f);
-                thrownBullet.StartTimer();
-                bullets.Enqueue(thrownBullet);
-            
+
+            Bullet thrownBullet = bullets.Dequeue();
+            thrownBullet.Reset();
+            thrownBullet.Position = position;
+            thrownBullet.Rotation = Rotation;
+            thrownBullet.AddVelocity(11f);
+            thrownBullet.StartTimer();
+            bullets.Enqueue(thrownBullet);
+
             return thrownBullet;
         }
     }
