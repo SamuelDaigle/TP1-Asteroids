@@ -54,8 +54,8 @@ namespace Exercice5
                     {
                         if (collidableObject.GetCollision().Intersects(other.GetCollision()))
                         {
-                            collidableObject.Terminate();
-                            other.Terminate();
+                            collidableObject.HasCollided(other);
+                            other.HasCollided(collidableObject);
                         }
                     }
                 }
@@ -76,15 +76,15 @@ namespace Exercice5
         }
 
 
-        public override void Terminate()
+        public override void HasCollided(ICollidable _other)
         {
-            Explode();
+            mainAsteroid.HasCollided(_other);
+            drawn = false;
         }
 
         public override void Explode()
         {
-            mainAsteroid.Terminate();
-            drawn = false;
+            
         }
 
         public override BoundingSphere GetCollision()

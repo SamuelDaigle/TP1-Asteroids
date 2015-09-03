@@ -9,7 +9,6 @@ namespace Exercice5
     public class Bullet : Object2D, IMovable
     {
         private Vector2 velocity;
-        private BoundingSphere collisionSphere;
         private DateTime birth;
         private TimeSpan lifeTime;
 
@@ -31,13 +30,13 @@ namespace Exercice5
 
         public Bullet()
         {
-            lifeTime = new TimeSpan(0,0,1);
+            lifeTime = new TimeSpan(0, 0, 1);
         }
 
         // IMovable
         public void Update(BoundingBox screen)
         {
-            if(DateTime.Now - birth >= lifeTime)
+            if (DateTime.Now - birth >= lifeTime)
             {
                 drawn = false;
             }
@@ -83,9 +82,12 @@ namespace Exercice5
             velocity += (new Vector2((float)Math.Cos(sprite.Rotation), (float)Math.Sin(sprite.Rotation)) * _speed);
         }
 
-        public override void Terminate()
+        public override void HasCollided(ICollidable _other)
         {
-            drawn = false;
+            if (_other.GetType() != typeof(Player) && _other.GetType() != typeof(Bullet))
+            {
+                //drawn = false;
+            }
         }
 
         public void StartTimer()

@@ -103,10 +103,16 @@ namespace Exercice5
             // Asteroid
             Composite asteroid = NewAsteroid();
 
+            // Bonus
+            Bonus shrinkBonus = new Bonus(Bonus.Type.BIGGER_BULLETS);
+            shrinkBonus.Initialize(new Sprite(Content.Load<Texture2D>("Graphics\\ship"), 0.3f), new Vector2(700, 500));
+            shrinkBonus.AddObserver(Player.GetInstance());
+
 
             // Add all previous objects to scene.
             scene.AddDrawableObject(Player.GetInstance());
             scene.AddDrawableObject(asteroid);
+            scene.AddDrawableObject(shrinkBonus);
         }
 
 
@@ -186,7 +192,9 @@ namespace Exercice5
             }
             if (keyboardState.IsKeyDown(Keys.Space))
             {
-                scene.AddDrawableObject(Player.GetInstance().Shoot());
+                Bullet bullet = Player.GetInstance().Shoot();
+                if (bullet != null)
+                    scene.AddDrawableObject(bullet);
             }
         }
 

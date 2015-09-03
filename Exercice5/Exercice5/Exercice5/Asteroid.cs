@@ -67,7 +67,7 @@ namespace Exercice5
             velocity += (new Vector2((float)Math.Cos(sprite.Rotation), (float)Math.Sin(sprite.Rotation)) * _speed);
         }
 
-        public override void Terminate()
+        public override void HasCollided(ICollidable _other)
         {
             Explode();
         }

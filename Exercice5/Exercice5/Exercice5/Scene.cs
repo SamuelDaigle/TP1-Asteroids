@@ -35,6 +35,8 @@ namespace Exercice5
             }
 
             CheckCollision();
+
+            
         }
 
         private void CheckCollision()
@@ -47,10 +49,21 @@ namespace Exercice5
                     {
                         if (collidableObject.GetCollision().Intersects(other.GetCollision()))
                         {
-                            collidableObject.Terminate();
-                            other.Terminate();
+                            collidableObject.HasCollided(other);
+                            other.HasCollided(collidableObject);
                         }
                     }
+                }
+            }
+        }
+
+        private void CheckIfDeleted()
+        {
+            foreach (Object2D object2D in drawableObjects)
+            {
+                if (!object2D.IsDrawn())
+                {
+                    drawableObjects.Remove(object2D);
                 }
             }
         }
