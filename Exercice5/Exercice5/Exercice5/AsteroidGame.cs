@@ -91,6 +91,8 @@ namespace Exercice5
 
             scene = new Scene();
 
+            AsteroidFactory.SetContent(Content);
+
             //Initialize Screen Border collisions
             screenBox.Min.X = 0;
             screenBox.Min.Y = 0;
@@ -98,10 +100,10 @@ namespace Exercice5
             screenBox.Max.Y = graphics.GraphicsDevice.Viewport.Height;
 
             // Player
-            Player.GetInstance().Initialize(new Sprite(Content.Load<Texture2D>("Graphics\\ship"), 0.3f), new Vector2(500, 300), new Sprite(Content.Load<Texture2D>("Graphics\\ship"), 0.05f));
+            Player.GetInstance().Initialize(new Sprite(Content.Load<Texture2D>("Graphics\\ship"), 0.3f), new Vector2(500, 350), new Sprite(Content.Load<Texture2D>("Graphics\\ship"), 0.05f));
 
             // Asteroid
-            Composite asteroid = NewAsteroid();
+            scene.AddDrawableObject(AsteroidFactory.createNewAsteroid(1, new Vector2(150,150)));
 
             // Bonus
             Bonus shrinkBonus = new Bonus(Bonus.Type.BIGGER_BULLETS);
@@ -111,7 +113,6 @@ namespace Exercice5
 
             // Add all previous objects to scene.
             scene.AddDrawableObject(Player.GetInstance());
-            scene.AddDrawableObject(asteroid);
             scene.AddDrawableObject(shrinkBonus);
         }
 
@@ -212,33 +213,6 @@ namespace Exercice5
                 scene.AddDrawableObject(Player.GetInstance().Shoot());
             }
             oldGamePadState = padOneState;
-        }
-
-        private Composite NewAsteroid()
-        {
-            Composite asteroid = new Composite();
-            Vector2 position = new Vector2(200, 400);
-
-            asteroid.AddDrawableObject(createAsteroid(position, Asteroid.Size.SMALL));
-            asteroid.AddDrawableObject(createAsteroid(position, Asteroid.Size.SMALL));
-            asteroid.AddDrawableObject(createAsteroid(position, Asteroid.Size.SMALL));
-            asteroid.AddDrawableObject(createAsteroid(position, Asteroid.Size.SMALL));
-            asteroid.AddDrawableObject(createAsteroid(position, Asteroid.Size.MEDIUM));
-            asteroid.AddDrawableObject(createAsteroid(position, Asteroid.Size.MEDIUM));
-            asteroid.SetMainObject(createAsteroid(position, Asteroid.Size.LARGE));
-
-            return asteroid;
-        }
-
-        private Asteroid createAsteroid(Vector2 _position, Asteroid.Size _size)
-        {
-            Texture2D image = Content.Load<Texture2D>("Graphics\\asteroid");
-
-            Asteroid asteroid = new Asteroid();
-            asteroid.Initialize(new Sprite(image, 1f, 2f), _position, _size);
-            asteroid.AddVelocity(3f);
-
-            return asteroid;
         }
     }
 }

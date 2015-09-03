@@ -86,7 +86,7 @@ namespace Exercice5
         {
             if (_other.GetType() != typeof(Player) && _other.GetType() != typeof(Bullet))
             {
-                //drawn = false;
+                drawn = false;
             }
         }
 

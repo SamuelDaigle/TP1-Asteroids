@@ -7,26 +7,13 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Exercice5
 {
-    public class Asteroid : ExplodableObject, IMovable
+    public abstract class Asteroid : Object2D, IMovable
     {
         private Vector2 velocity;
-        private Size size = Size.LARGE;
 
-        public enum Size { SMALL, MEDIUM, LARGE };
-
-        public void Initialize(Sprite _sprite, Vector2 _position, Size _size)
+        public void Initialize(Sprite _sprite, Vector2 _position)
         {
             base.Initialize(_sprite, _position);
-            size = _size;
-
-            if (_size == Size.SMALL)
-            {
-                _sprite.Scale = 0.3f;
-            }
-            else if (_size == Size.MEDIUM)
-            {
-                _sprite.Scale = 0.6f;
-            }
         }
 
         // IMovable
@@ -36,8 +23,8 @@ namespace Exercice5
             position.Y += (int)(velocity.Y);
 
             collisionSphere.Radius = GetDimension().X / 2;
-            collisionSphere.Center.X = position.X + collisionSphere.Radius;
-            collisionSphere.Center.Y = position.Y + collisionSphere.Radius;
+            collisionSphere.Center.X = position.X;
+            collisionSphere.Center.Y = position.Y;
 
             StayInBounds(screen);
         }
@@ -66,18 +53,5 @@ namespace Exercice5
         {
             velocity += (new Vector2((float)Math.Cos(sprite.Rotation), (float)Math.Sin(sprite.Rotation)) * _speed);
         }
-
-        public override void HasCollided(ICollidable _other)
-        {
-            Explode();
-        }
-
-        public override void Explode()
-        {
-            drawn = false;
-            position.X = 0;
-            position.Y = 0;
-        }
     }
-
 }
