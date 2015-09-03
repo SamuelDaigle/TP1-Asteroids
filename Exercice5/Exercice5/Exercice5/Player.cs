@@ -13,6 +13,7 @@ namespace Exercice5
         private Vector2 velocity;
         private Queue<Bullet> bullets;
         private readonly float MAX_VELOCITY = 7f;
+        private readonly int MAX_NB_BULLETS = 15;
 
         public static Player GetInstance()
         {
@@ -32,7 +33,7 @@ namespace Exercice5
         public void Initialize(Sprite _sprite, Vector2 _position, Sprite _bulletSprite)
         {
             base.Initialize(_sprite, _position);
-            for(int i = 0; i < 15; i++)
+            for (int i = 0; i < MAX_NB_BULLETS; i++)
             {
                 Bullet bullet = new Bullet();
                 bullet.Initialize(_bulletSprite, position);
@@ -41,11 +42,7 @@ namespace Exercice5
             }
         }
 
-        //*************************//
-
-
-
-        public void Update(BoundingBox screen)  
+        public void Update(BoundingBox screen)
         {
             double currentSpeed = GetSpeed();
 
@@ -98,11 +95,12 @@ namespace Exercice5
             velocity += (new Vector2((float)Math.Cos(sprite.Rotation), (float)Math.Sin(sprite.Rotation)) * _speed);
         }
 
-        public override void Terminate()
+        public override void HasCollided(ICollidable _other)
         {
-            drawn = false;
-            position.X = 0;
-            position.Y = 0;
+            if (_other.GetType() != typeof(Bonus) && _other.GetType() != typeof(Bullet))
+            {
+                drawn = false;
+            }
         }
 
         private double GetSpeed()
@@ -112,16 +110,34 @@ namespace Exercice5
 
         public Bullet Shoot()
         {
-            
-                Bullet thrownBullet = bullets.Dequeue();
+            Bullet thrownBullet = null;
+            if (drawn)
+            {
+                thrownBullet = bullets.Dequeue();
                 thrownBullet.Reset();
                 thrownBullet.Position = position;
                 thrownBullet.Rotation = Rotation;
                 thrownBullet.AddVelocity(11f);
                 thrownBullet.StartTimer();
                 bullets.Enqueue(thrownBullet);
-            
+            }
+
             return thrownBullet;
+        }
+
+        public override void AddBonus(Bonus.Type _type)
+        {
+            base.AddBonus(_type);
+
+            if (_type == Bonus.Type.BIGGER_BULLETS)
+            {
+                for (int i = 0; i < MAX_NB_BULLETS; i++)
+                {
+                    Bullet bullet = bullets.Dequeue();
+                    bullet.SpriteImage.Scale = 0.1f;
+                    bullets.Enqueue(bullet);
+                }
+            }
         }
     }
 

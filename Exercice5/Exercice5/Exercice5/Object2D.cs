@@ -7,8 +7,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Exercice5
 {
-    public class Object2D : IDrawable, ICollidable
+    public class Object2D : IDrawable, ICollidable, IBonusObserver
     {
+        protected List<IBonusObserver> observers;
         protected BoundingSphere collisionSphere;
         protected Vector2 position;
         protected Sprite sprite;
@@ -30,12 +31,26 @@ namespace Exercice5
             }
         }
 
+        public Sprite SpriteImage
+        {
+            get
+            {
+                return sprite;
+            }
+        }
+
+        public void AddObserver(IBonusObserver _observer)
+        {
+            observers.Add(_observer);
+        }
+
         public virtual void Initialize(Sprite _sprite, Vector2 _position)
         {
             sprite = _sprite;
             position = _position;
             drawn = true;
-            collisionSphere = new BoundingSphere(new Vector3(_position,0), _sprite.GetDimension().X / 2);
+            collisionSphere = new BoundingSphere(new Vector3(_position, 0), _sprite.GetDimension().X / 2);
+            observers = new List<IBonusObserver>();
         }
 
         public virtual void Draw(SpriteBatch renderer)
@@ -66,15 +81,29 @@ namespace Exercice5
 
         public virtual BoundingSphere GetCollision()
         {
+            if (!drawn)
+            {
+                return new BoundingSphere(new Vector3(-100, -100, -1), 1);
+            }
             return collisionSphere;
         }
 
-        public virtual void Terminate() 
+        public virtual void HasCollided(ICollidable _other)
         {
-            drawn = false;
-            position.X = 0;
-            position.Y = 0;
+            if (_other.GetType() != typeof(Bonus))
+            {
+                drawn = false;
+                position.X = 0;
+                position.Y = 0;
+            }
         }
 
+        public virtual void AddBonus(Bonus.Type _type)
+        {
+            if (_type == Bonus.Type.SHRINK)
+            {
+                sprite.Scale /= 2;
+            }
+        }
     }
 }

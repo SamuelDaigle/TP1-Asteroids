@@ -73,12 +73,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AliveState.cs" />
+    <Compile Include="Bonus.cs" />
     <Compile Include="Bullet.cs" />
     <Compile Include="Composite.cs" />
     <Compile Include="ICollidable.cs" />
     <Compile Include="IDrawable.cs" />
     <Compile Include="IExplodable.cs" />
     <Compile Include="IMovable.cs" />
+    <Compile Include="IObserver.cs" />
     <Compile Include="Object2D.cs" />
     <Compile Include="Asteroid.cs" />
     <Compile Include="Player.cs" />
