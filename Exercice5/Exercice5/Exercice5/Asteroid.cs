@@ -11,11 +11,6 @@ namespace Exercice5
     {
         private Vector2 velocity;
 
-        public void Initialize(Sprite _sprite, Vector2 _position)
-        {
-            base.Initialize(_sprite, _position);
-        }
-
         // IMovable
         public void Update(BoundingBox screen)
         {

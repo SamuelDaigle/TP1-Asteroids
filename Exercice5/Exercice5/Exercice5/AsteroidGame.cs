@@ -92,6 +92,7 @@ namespace Exercice5
             scene = new Scene();
 
             AsteroidFactory.SetContent(Content);
+            EnemyFactory.SetContent(Content);
 
             //Initialize Screen Border collisions
             screenBox.Min.X = 0;
@@ -104,6 +105,9 @@ namespace Exercice5
 
             // Asteroid
             scene.AddDrawableObject(AsteroidFactory.createNewAsteroid(1, new Vector2(150,150)));
+
+            //Enemies
+            scene.AddDrawableObject(EnemyFactory.createEnemy(1, new Vector2(0, 0)));
 
             // Bonus
             Bonus shrinkBonus = new Bonus(Bonus.Type.BIGGER_BULLETS);
