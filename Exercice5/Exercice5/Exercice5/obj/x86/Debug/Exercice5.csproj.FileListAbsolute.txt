@@ -32,14 +32,3 @@ C:\Users\Belouga\Dropbox\ducktators\Sam & Seb\Exercice5\Exercice5\Exercice5\bin\
 C:\Users\Belouga\Dropbox\ducktators\Sam & Seb\Exercice5\Exercice5\Exercice5\bin\x86\Debug\ship.xnb
 C:\Users\Belouga\Dropbox\ducktators\Sam & Seb\Exercice5\Exercice5\Exercice5\bin\x86\Debug\asteroid.xnb
 C:\Users\Belouga\Dropbox\ducktators\Sam & Seb\Exercice5\Exercice5\Exercice5\bin\x86\Debug\explosion1.xnb
-C:\Users\Belouga\Desktop\TP1-Asteroids\Exercice5\Exercice5\Exercice5\obj\x86\Debug\Exercice5.csprojResolveAssemblyReference.cache
-C:\Users\Belouga\Desktop\TP1-Asteroids\Exercice5\Exercice5\Exercice5\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
-C:\Users\Belouga\Desktop\TP1-Asteroids\Exercice5\Exercice5\Exercice5\bin\x86\Debug\Content\Graphics\background.xnb
-C:\Users\Belouga\Desktop\TP1-Asteroids\Exercice5\Exercice5\Exercice5\bin\x86\Debug\Content\Graphics\ship.xnb
-C:\Users\Belouga\Desktop\TP1-Asteroids\Exercice5\Exercice5\Exercice5\bin\x86\Debug\Content\Graphics\explosion1.xnb
-C:\Users\Belouga\Desktop\TP1-Asteroids\Exercice5\Exercice5\Exercice5\bin\x86\Debug\Content\Graphics\asteroid.xnb
-C:\Users\Belouga\Desktop\TP1-Asteroids\Exercice5\Exercice5\Exercice5\bin\x86\Debug\Content\Font\MainFont.xnb
-C:\Users\Belouga\Desktop\TP1-Asteroids\Exercice5\Exercice5\Exercice5\bin\x86\Debug\Exercice5.exe
-C:\Users\Belouga\Desktop\TP1-Asteroids\Exercice5\Exercice5\Exercice5\bin\x86\Debug\Exercice5.pdb
-C:\Users\Belouga\Desktop\TP1-Asteroids\Exercice5\Exercice5\Exercice5\obj\x86\Debug\Exercice5.exe
-C:\Users\Belouga\Desktop\TP1-Asteroids\Exercice5\Exercice5\Exercice5\obj\x86\Debug\Exercice5.pdb

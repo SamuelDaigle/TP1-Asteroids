@@ -42,7 +42,7 @@ namespace Exercice5
             if (asteroid != null)
             {
                 asteroid.Initialize(new Sprite(content.Load<Texture2D>("Graphics\\asteroid"), scale), _position);
-                asteroid.Rotate(RandomGenerator.GetRandom(0, 4));
+                asteroid.Rotate(RandomGenerator.GetRandomFloat(0, 4));
                 asteroid.AddVelocity(4f);
             }
             return asteroid;

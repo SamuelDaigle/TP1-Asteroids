@@ -21,6 +21,7 @@ namespace Exercice5
         {
             content = _content;
             AsteroidFactory.SetContent(_content);
+            EnemyFactory.SetContent(_content);
             scene = new Scene();
             input = AsteroidGame.input;
 
@@ -29,6 +30,9 @@ namespace Exercice5
 
             // Asteroid
             Asteroid asteroid = AsteroidFactory.createNewAsteroid(1, Vector2.Zero);
+
+            //Enemy
+            Enemy enemy = EnemyFactory.createEnemy(1, Vector2.Zero);
 
             // Bonus
             Bonus shrinkBonus = new Bonus(Bonus.Type.BIGGER_BULLETS);
@@ -39,6 +43,7 @@ namespace Exercice5
             scene.AddDrawableObject(Player.GetInstance());
             scene.AddDrawableObject(asteroid);
             scene.AddDrawableObject(shrinkBonus);
+            scene.AddDrawableObject(enemy);
         }
 
         public void Update()

@@ -11,7 +11,20 @@ namespace Exercice5
         private Vector2 velocity;
         private DateTime birth;
         private TimeSpan lifeTime;
+        private Object2D shooter;
 
+        
+        public Object2D Shooter
+        {
+            get
+            {
+                return shooter;
+            }
+            set 
+            {
+                shooter = value;
+            }
+        }
         public Vector2 Position
         {
             set
