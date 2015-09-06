@@ -72,16 +72,18 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AsteroidFactory.cs" />
     <Compile Include="Bonus.cs" />
     <Compile Include="Bullet.cs" />
-    <Compile Include="Composite.cs" />
     <Compile Include="InputHandler.cs" />
+    <Compile Include="LargeAsteroid.cs" />
+    <Compile Include="MediumAsteroid.cs" />
+    <Compile Include="Random.cs" />
     <Compile Include="Score.cs" />
     <Compile Include="LeaderboardState.cs" />
     <Compile Include="PlayState.cs" />
     <Compile Include="ICollidable.cs" />
     <Compile Include="IDrawable.cs" />
-    <Compile Include="IExplodable.cs" />
     <Compile Include="IGameState.cs" />
     <Compile Include="IMovable.cs" />
     <Compile Include="IObserver.cs" />
@@ -93,6 +95,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="AsteroidGame.cs" />
     <Compile Include="Scene.cs" />
+    <Compile Include="SmallAsteroid.cs" />
     <Compile Include="Sprite.cs" />
     <Compile Include="XMLScoreReader.cs" />
     <Compile Include="XMLScoreWriter.cs" />
