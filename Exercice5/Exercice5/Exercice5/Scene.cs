@@ -35,6 +35,21 @@ namespace Exercice5
                 sprite.Update(screen);
             }
 
+            List<Bullet> bulletsToAdd = new List<Bullet>();
+
+            foreach(Enemy enemy in drawableObjects.OfType<Enemy>())
+            {
+                bulletsToAdd.Add(enemy.chooseToAttack(drawableObjects));
+            }
+            foreach(Bullet bullet in bulletsToAdd)
+            {
+                if (bullet != null)
+                {
+                    AddDrawableObject(bullet);
+
+                }
+            }
+
             CheckIfDeleted();
             CheckCollision();
 
@@ -55,7 +70,15 @@ namespace Exercice5
                     {
                         if (collidableObject.GetType() == typeof(LargeAsteroid) || other.GetType() == typeof(LargeAsteroid))
                         {
-                            createNewAsteroids((Asteroid)collidableObject, other);
+                            try
+                            {
+                                createNewAsteroids((Asteroid)collidableObject, other);
+
+                            }
+                            catch
+                            {
+                                createNewAsteroids((Asteroid)other, collidableObject);
+                            }
                         }
                         else if (collidableObject.GetType() == typeof(MediumAsteroid) || other.GetType() == typeof(MediumAsteroid))
                         {

@@ -97,9 +97,16 @@ namespace Exercice5
 
         public override void HasCollided(ICollidable _other)
         {
-            if (_other.GetType() != typeof(Bonus) && _other.GetType() != typeof(Bullet))
+            if (_other.GetType() != typeof(Bonus))
             {
-                drawn = false;
+                if(_other.GetType() != typeof(Bullet))
+                {
+                    drawn = false;
+                }
+                else if(((Bullet)_other).Shooter != this)
+                {
+                    drawn = false;
+                }
             }
         }
 
@@ -115,6 +122,7 @@ namespace Exercice5
             {
                 thrownBullet = bullets.Dequeue();
                 thrownBullet.Reset();
+                thrownBullet.Shooter = this;
                 thrownBullet.Position = position;
                 thrownBullet.Rotation = Rotation;
                 thrownBullet.AddVelocity(11f);
