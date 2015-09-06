@@ -10,6 +10,7 @@ namespace Exercice5
     public class Scene
     {
         private List<Object2D> drawableObjects = new List<Object2D>();
+        Stack<Asteroid> asteroidsToCreate = new Stack<Asteroid>();
 
         public void AddDrawableObject(Object2D drawableObject)
         {
@@ -34,36 +35,76 @@ namespace Exercice5
                 sprite.Update(screen);
             }
 
+            CheckIfDeleted();
             CheckCollision();
 
-            
+
         }
 
         private void CheckCollision()
         {
-            foreach (ICollidable collidableObject in drawableObjects.OfType<ICollidable>())
+            ICollidable collidableObject;
+            ICollidable other;
+            for (int i = 0; i < drawableObjects.Count; i++)
             {
-                foreach (ICollidable other in drawableObjects.OfType<ICollidable>())
+                collidableObject = drawableObjects.ElementAt(i);
+                for (int j = i + 1; j < drawableObjects.Count; j++)
                 {
-                    if (!collidableObject.Equals(other))
+                    other = drawableObjects.ElementAt(j);
+                    if (collidableObject.GetCollision().Intersects(other.GetCollision()))
                     {
-                        if (collidableObject.GetCollision().Intersects(other.GetCollision()))
+                        if (collidableObject.GetType() == typeof(LargeAsteroid) || other.GetType() == typeof(LargeAsteroid))
                         {
-                            collidableObject.HasCollided(other);
-                            other.HasCollided(collidableObject);
+                            createNewAsteroids((Asteroid)collidableObject, other);
                         }
+                        else if (collidableObject.GetType() == typeof(MediumAsteroid) || other.GetType() == typeof(MediumAsteroid))
+                        {
+                            try
+                            {
+                                createNewAsteroids((Asteroid)collidableObject, other);
+
+                            }
+                            catch
+                            {
+                                createNewAsteroids((Asteroid)other, collidableObject);
+                            }
+                        }
+                        collidableObject.HasCollided(other);
+                        other.HasCollided(collidableObject);
                     }
+                }
+            }
+            foreach (Asteroid asteroid in asteroidsToCreate)
+            {
+                this.AddDrawableObject(asteroid);
+            }
+            asteroidsToCreate.Clear();
+        }
+
+        private void createNewAsteroids(Asteroid asteroid, ICollidable other)
+        {
+            if (other.GetType() == typeof(Bullet))
+            {
+                if (asteroid.GetType() == typeof(LargeAsteroid))
+                {
+                    asteroidsToCreate.Push(AsteroidFactory.createNewAsteroid(2, asteroid.Position));
+                    asteroidsToCreate.Push(AsteroidFactory.createNewAsteroid(2, asteroid.Position));
+                }
+                else if (asteroid.GetType() == typeof(MediumAsteroid))
+                {
+                    asteroidsToCreate.Push(AsteroidFactory.createNewAsteroid(3, asteroid.Position));
+                    asteroidsToCreate.Push(AsteroidFactory.createNewAsteroid(3, asteroid.Position));
                 }
             }
         }
 
         private void CheckIfDeleted()
         {
-            foreach (Object2D object2D in drawableObjects)
+            for (int i = 0; i < drawableObjects.Count; i++)
             {
-                if (!object2D.IsDrawn())
+                if (!drawableObjects.ElementAt(i).IsDrawn())
                 {
-                    drawableObjects.Remove(object2D);
+                    drawableObjects.RemoveAt(i);
                 }
             }
         }
