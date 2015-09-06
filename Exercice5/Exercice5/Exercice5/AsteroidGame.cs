@@ -16,11 +16,11 @@ namespace Exercice5
     /// </summary>
     public class AsteroidGame : Microsoft.Xna.Framework.Game
     {
+        public static BoundingBox screenBox;
+        public static IGameState gameState;
+        public static InputHandler input;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Scene scene;
-        BoundingBox screenBox = new BoundingBox();
-        GamePadState oldGamePadState;
 
         public AsteroidGame()
         {
@@ -76,6 +76,13 @@ namespace Exercice5
                     //}
                 }
             }
+
+            screenBox = new BoundingBox();
+            screenBox.Min.X = 0;
+            screenBox.Min.Y = 0;
+            screenBox.Max.X = graphics.GraphicsDevice.Viewport.Width;
+            screenBox.Max.Y = graphics.GraphicsDevice.Viewport.Height;
+
             return false;
         }
 
@@ -89,31 +96,9 @@ namespace Exercice5
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            scene = new Scene();
-
-            AsteroidFactory.SetContent(Content);
-
-            //Initialize Screen Border collisions
-            screenBox.Min.X = 0;
-            screenBox.Min.Y = 0;
-            screenBox.Max.X = graphics.GraphicsDevice.Viewport.Width;
-            screenBox.Max.Y = graphics.GraphicsDevice.Viewport.Height;
-
-            // Player
-            Player.GetInstance().Initialize(new Sprite(Content.Load<Texture2D>("Graphics\\ship"), 0.3f), new Vector2(500, 350), new Sprite(Content.Load<Texture2D>("Graphics\\ship"), 0.05f));
-
-            // Asteroid
-            scene.AddDrawableObject(AsteroidFactory.createNewAsteroid(1, new Vector2(150,150)));
-
-            // Bonus
-            Bonus shrinkBonus = new Bonus(Bonus.Type.BIGGER_BULLETS);
-            shrinkBonus.Initialize(new Sprite(Content.Load<Texture2D>("Graphics\\ship"), 0.3f), new Vector2(700, 500));
-            shrinkBonus.AddObserver(Player.GetInstance());
-
-
-            // Add all previous objects to scene.
-            scene.AddDrawableObject(Player.GetInstance());
-            scene.AddDrawableObject(shrinkBonus);
+            input = new InputHandler();
+            gameState = new MenuState();
+            gameState.LoadContent(Content);
         }
 
 
@@ -136,7 +121,11 @@ namespace Exercice5
 
             HandleInput();
 
-            scene.Update(screenBox);
+            if (gameState.HasExited())
+                this.Exit();
+
+
+            gameState.Update();
 
             base.Update(gameTime);
         }
@@ -150,8 +139,7 @@ namespace Exercice5
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
 
-            spriteBatch.Draw(Content.Load<Texture2D>("Graphics\\background"), Vector2.Zero, null, Color.White, 0f, Vector2.Zero, 2.0f, SpriteEffects.None, 0f);
-            scene.Draw(spriteBatch);
+            gameState.Draw(spriteBatch);
 
             spriteBatch.End();
             base.Draw(gameTime);
@@ -159,60 +147,10 @@ namespace Exercice5
 
         private void HandleInput()
         {
-            if (GamePad.GetState(PlayerIndex.One).IsConnected)
-            {
-                HandleGamePadInput();
-            }
-            else
-            {
-                HandleKeyboardInput();
-            }
-        }
+            gameState.HandleInput();
+            input.Update();
+        }        
 
-        private void HandleKeyboardInput()
-        {
-            KeyboardState keyboardState = Keyboard.GetState();
-            if (keyboardState.IsKeyDown(Keys.Escape))
-                this.Exit();
-
-            if (keyboardState.IsKeyDown(Keys.W))
-            {
-                Player.GetInstance().AddVelocity(0.3f);
-            }
-            if (keyboardState.IsKeyDown(Keys.S))
-            {
-                Player.GetInstance().AddVelocity(-0.3f);
-            }
-            if (keyboardState.IsKeyDown(Keys.D))
-            {
-                Player.GetInstance().Rotate(0.1f);
-            }
-            if (keyboardState.IsKeyDown(Keys.A))
-            {
-                Player.GetInstance().Rotate(-0.1f);
-            }
-            if (keyboardState.IsKeyDown(Keys.Space))
-            {
-                Bullet bullet = Player.GetInstance().Shoot();
-                if (bullet != null)
-                    scene.AddDrawableObject(bullet);
-            }
-        }
-
-        private void HandleGamePadInput()
-        {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
-                this.Exit();
-
-            GamePadState padOneState = GamePad.GetState(PlayerIndex.One);
-            Player.GetInstance().AddVelocity(padOneState.ThumbSticks.Left.Y);
-            Player.GetInstance().Rotate(padOneState.ThumbSticks.Left.X / 10);
-
-            if (padOneState.IsButtonDown(Buttons.A) && oldGamePadState.IsButtonUp(Buttons.A))
-            {
-                scene.AddDrawableObject(Player.GetInstance().Shoot());
-            }
-            oldGamePadState = padOneState;
-        }
+        
     }
 }
