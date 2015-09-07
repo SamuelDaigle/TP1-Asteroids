@@ -10,9 +10,19 @@ namespace Exercice5
     public abstract class Asteroid : Object2D, IMovable
     {
         private Vector2 velocity;
+        DateTime birth;
+
+        public DateTime Birth
+        {
+            get
+            {
+                return birth;
+            }
+        }
 
         public void Initialize(Sprite _sprite, Vector2 _position)
         {
+            birth = DateTime.Now;
             base.Initialize(_sprite, _position);
         }
 
