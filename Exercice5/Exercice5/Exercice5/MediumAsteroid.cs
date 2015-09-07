@@ -13,7 +13,11 @@ namespace Exercice5
         {
             if (_other.GetType() == typeof(MediumAsteroid))
             {
-
+                TimeSpan spawningDelay = new TimeSpan(0, 0, 3);
+                if (DateTime.Now - Birth >= spawningDelay)
+                {
+                    drawn = false;
+                }
             }
             else if (_other.GetType() == typeof(Bullet))
             {

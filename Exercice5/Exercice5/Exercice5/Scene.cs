@@ -93,24 +93,34 @@ namespace Exercice5
             {
                 try
                 {
-                    createNewAsteroids((Asteroid)collidableObject, _other);
+                    createNewAsteroids((LargeAsteroid)collidableObject, _other);
 
                 }
                 catch
                 {
-                    createNewAsteroids((Asteroid)_other, collidableObject);
+                    createNewAsteroids((LargeAsteroid)_other, collidableObject);
                 }
             }
             else if (collidableObject.GetType() == typeof(MediumAsteroid) || _other.GetType() == typeof(MediumAsteroid))
             {
                 try
                 {
-                    createNewAsteroids((Asteroid)collidableObject, _other);
-
+                    createNewAsteroids((MediumAsteroid)collidableObject, _other);
                 }
                 catch
                 {
-                    createNewAsteroids((Asteroid)_other, collidableObject);
+                    createNewAsteroids((MediumAsteroid)_other, collidableObject);
+                }
+            }
+            else if (collidableObject.GetType() == typeof(SmallAsteroid) || _other.GetType() == typeof(SmallAsteroid))
+            {
+                try
+                {
+                    createNewAsteroids((SmallAsteroid)collidableObject, _other);
+                }
+                catch
+                {
+                    createNewAsteroids((SmallAsteroid)_other, collidableObject);
                 }
             }
         }
@@ -122,13 +132,28 @@ namespace Exercice5
                 float[] rotationsValue = CalculateNewRotations(asteroid, (Bullet)other);
                 if (asteroid.GetType() == typeof(LargeAsteroid))
                 {
-                    asteroidsToCreate.Push(AsteroidFactory.createNewAsteroid(2, asteroid.Position, rotationsValue[0] + asteroid.Rotation));
-                    asteroidsToCreate.Push(AsteroidFactory.createNewAsteroid(2, asteroid.Position, rotationsValue[1] + asteroid.Rotation));
+                    asteroidsToCreate.Push(AsteroidFactory.createNewAsteroid(2, asteroid.Position + asteroid.Position / 10, rotationsValue[0] + asteroid.Rotation));
+                    asteroidsToCreate.Push(AsteroidFactory.createNewAsteroid(2, asteroid.Position - asteroid.Position / 10, rotationsValue[1] + asteroid.Rotation));
                 }
                 else if (asteroid.GetType() == typeof(MediumAsteroid))
                 {
                     asteroidsToCreate.Push(AsteroidFactory.createNewAsteroid(3, asteroid.Position, rotationsValue[0] + asteroid.Rotation));
                     asteroidsToCreate.Push(AsteroidFactory.createNewAsteroid(3, asteroid.Position, rotationsValue[1] + asteroid.Rotation));
+                }
+            }
+            else if (other.GetType() == asteroid.GetType())
+            {
+                TimeSpan delayBeforeStacking = new TimeSpan(0, 0, 0, 3);
+                if (DateTime.Now - asteroid.Birth >= delayBeforeStacking && DateTime.Now - ((Asteroid)other).Birth >= delayBeforeStacking)
+                {
+                    if (asteroid.GetType() == typeof(MediumAsteroid))
+                    {
+                        asteroidsToCreate.Push(AsteroidFactory.createNewAsteroid(1, asteroid.Position, RandomGenerator.GetRandomFloat(0, 6.283)));
+                    }
+                    else if (asteroid.GetType() == typeof(SmallAsteroid))
+                    {
+                        asteroidsToCreate.Push(AsteroidFactory.createNewAsteroid(2, asteroid.Position, RandomGenerator.GetRandomFloat(0, 6.283)));
+                    }
                 }
             }
         }
