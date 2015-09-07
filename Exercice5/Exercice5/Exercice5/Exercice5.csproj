@@ -82,6 +82,7 @@
     <Compile Include="IUIElement.cs" />
     <Compile Include="LargeAsteroid.cs" />
     <Compile Include="LargeEnemy.cs" />
+    <Compile Include="Level.cs" />
     <Compile Include="MediumAsteroid.cs" />
     <Compile Include="Random.cs" />
     <Compile Include="Score.cs" />

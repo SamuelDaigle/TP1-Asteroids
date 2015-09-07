@@ -187,5 +187,10 @@ namespace Exercice5
             }
             uiContainer.Draw(renderer);
         }
+
+        public bool onlyHasPlayer()
+        {
+            return (drawableObjects.Count == 1 && drawableObjects.First<Object2D>().GetType() == typeof(Player));
+        }
     }
 }
