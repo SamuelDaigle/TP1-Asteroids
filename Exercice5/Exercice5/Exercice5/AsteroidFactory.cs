@@ -17,10 +17,10 @@ namespace Exercice5
             content = _content;
         }
 
-        public static Asteroid createNewAsteroid(int size, Vector2 _position)
+        public static Asteroid createNewAsteroid(int size, Vector2 _position, float _rotation)
         {
             Asteroid asteroid;
-            float scale = 1f;
+            float scale = 0.6f;
 
             switch (size)
             {
@@ -29,11 +29,11 @@ namespace Exercice5
                     break;
                 case 2:
                     asteroid = new MediumAsteroid();
-                    scale = 0.6f;
+                    scale = 0.4f;
                     break;
                 case 3:
                     asteroid = new SmallAsteroid();
-                    scale = 0.3f;
+                    scale = 0.2f;
                     break;
                 default:
                     asteroid = null;
@@ -42,7 +42,7 @@ namespace Exercice5
             if (asteroid != null)
             {
                 asteroid.Initialize(new Sprite(content.Load<Texture2D>("Graphics\\asteroid"), scale), _position);
-                asteroid.Rotate(RandomGenerator.GetRandomFloat(0, 3.1415));
+                asteroid.Rotate(_rotation);
                 asteroid.AddVelocity(4f);
             }
             return asteroid;

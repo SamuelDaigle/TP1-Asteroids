@@ -50,7 +50,7 @@ namespace Exercice5
             }
 
             // Asteroid
-            Asteroid asteroid = AsteroidFactory.createNewAsteroid(1, Vector2.Zero);
+            Asteroid asteroid = AsteroidFactory.createNewAsteroid(1, Vector2.Zero, RandomGenerator.GetRandomFloat(0, 3.1415));
 
             //Enemy
             Enemy enemy = EnemyFactory.createEnemy(1, Vector2.Zero);
@@ -64,7 +64,7 @@ namespace Exercice5
 
             // Add all previous objects to scene.
             scene.AddDrawableObject(Player.GetInstance());
-            //scene.AddDrawableObject(asteroid);
+            scene.AddDrawableObject(asteroid);
             scene.AddDrawableObject(shrinkBonus);
             //scene.AddDrawableObject(enemy);
             //scene.AddDrawableObject(largeEnemy);
