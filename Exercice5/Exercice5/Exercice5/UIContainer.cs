@@ -9,21 +9,21 @@ namespace Exercice5
 {
     public class UIContainer
     {
-        List<UIElement> uiElements;
+        List<IUIElement> uiElements;
 
         public UIContainer()
         {
-            uiElements = new List<UIElement>();
+            uiElements = new List<IUIElement>();
         }
 
-        public void AddElement(UIElement _element)
+        public void AddElement(IUIElement _element)
         {
             uiElements.Add(_element);
         }
 
         public void Draw(SpriteBatch renderer)
         {
-            foreach (UIElement ui in uiElements)
+            foreach (IUIElement ui in uiElements)
             {
                 ui.Draw(renderer);
             }

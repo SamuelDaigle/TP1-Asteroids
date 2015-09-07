@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Exercice5
 {
-    public class UIElement : IDrawable
+    public class UIImage : IUIElement
     {
         private Sprite sprite;
         private Vector2 position;

@@ -7,13 +7,14 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Exercice5
 {
-    public class Player : Object2D, IMovable
+    public class Player : Object2D, IMovable, IScoreObserver
     {
         private static Player instance = null;
         private Vector2 velocity;
         private Queue<Bullet> bullets;
         private readonly float MAX_VELOCITY = 7f;
-        private readonly int MAX_NB_BULLETS = 15;
+        public static readonly int MAX_NB_BULLETS = 15;
+        private int score;
 
         public static Player GetInstance()
         {
@@ -28,18 +29,17 @@ namespace Exercice5
         private Player()
         {
             bullets = new Queue<Bullet>();
+            score = 0;
+        }
+
+        public void StoreBullet(Bullet _bullet)
+        {
+            bullets.Enqueue(_bullet);
         }
 
         public void Initialize(Sprite _sprite, Vector2 _position, Sprite _bulletSprite)
         {
             base.Initialize(_sprite, _position);
-            for (int i = 0; i < MAX_NB_BULLETS; i++)
-            {
-                Bullet bullet = new Bullet();
-                bullet.Initialize(_bulletSprite, position);
-                bullet.AddVelocity(5f);
-                bullets.Enqueue(bullet);
-            }
         }
 
         public void Update(BoundingBox screen)
@@ -146,6 +146,11 @@ namespace Exercice5
                     bullets.Enqueue(bullet);
                 }
             }
+        }
+
+        public void AddScore(int _score)
+        {
+            score += _score;
         }
     }
 

@@ -78,6 +78,8 @@
     <Compile Include="Enemy.cs" />
     <Compile Include="EnemyFactory.cs" />
     <Compile Include="InputHandler.cs" />
+    <Compile Include="IScoreObserver.cs" />
+    <Compile Include="IUIElement.cs" />
     <Compile Include="LargeAsteroid.cs" />
     <Compile Include="LargeEnemy.cs" />
     <Compile Include="MediumAsteroid.cs" />
@@ -103,7 +105,8 @@
     <Compile Include="SpecialEnemy.cs" />
     <Compile Include="Sprite.cs" />
     <Compile Include="UIContainer.cs" />
-    <Compile Include="UIElement.cs" />
+    <Compile Include="UIImage.cs" />
+    <Compile Include="UIText.cs" />
     <Compile Include="XMLScoreReader.cs" />
     <Compile Include="XMLScoreWriter.cs" />
   </ItemGroup>

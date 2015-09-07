@@ -8,6 +8,7 @@ namespace Exercice5
 {
     public class Bullet : Object2D, IMovable
     {
+        private List<IScoreObserver> scoreObservers;
         private Vector2 velocity;
         private DateTime birth;
         private TimeSpan lifeTime;
@@ -43,7 +44,13 @@ namespace Exercice5
 
         public Bullet()
         {
+            scoreObservers = new List<IScoreObserver>();
             lifeTime = new TimeSpan(0, 0, 1);
+        }
+
+        public void AddObserver(IScoreObserver _observer)
+        {
+            scoreObservers.Add(_observer);
         }
 
         // IMovable
@@ -100,6 +107,48 @@ namespace Exercice5
             if (_other != shooter && _other.GetType() != typeof(Bullet))
             {
                 drawn = false;
+            }
+
+            CheckScore(_other);
+        }
+
+        private void CheckScore(ICollidable _other)
+        {
+            if (_other.GetType() == typeof(Bonus))
+            {
+                NotifyScoreObserver(100);
+            }
+            if (_other.GetType() == typeof(LargeAsteroid))
+            {
+                NotifyScoreObserver(500);
+            }
+            if (_other.GetType() == typeof(MediumAsteroid))
+            {
+                NotifyScoreObserver(350);
+            }
+            if (_other.GetType() == typeof(SmallAsteroid))
+            {
+                NotifyScoreObserver(200);
+            }
+            if (_other.GetType() == typeof(SpecialEnemy))
+            {
+                NotifyScoreObserver(1500);
+            }
+            if (_other.GetType() == typeof(SmallEnemy))
+            {
+                NotifyScoreObserver(750);
+            }
+            if (_other.GetType() == typeof(LargeEnemy))
+            {
+                NotifyScoreObserver(1000);
+            }
+        }
+
+        private void NotifyScoreObserver(int _score)
+        {
+            foreach (IScoreObserver observer in scoreObservers)
+            {
+                observer.AddScore(_score);
             }
         }
 
