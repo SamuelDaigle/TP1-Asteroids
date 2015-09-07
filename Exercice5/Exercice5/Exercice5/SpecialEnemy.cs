@@ -7,10 +7,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Exercice5
 {
-    public class SmallEnemy : Enemy
+    class SpecialEnemy : Enemy
     {
         private int frameCount = 0;
-        private float direction;
         private const float DIRECTION_VALUE = 0.05f;
 
         public override void Update(BoundingBox screen)
@@ -35,21 +34,7 @@ namespace Exercice5
             if (frameCount == 2)
             {
                 frameCount = 0;
-                direction = DIRECTION_VALUE;
-                if (RandomGenerator.GetRandomInt(0, 2) >= 1)
-                {
-                    direction = -DIRECTION_VALUE;
-                }
-                if (Rotation > 3.1415 / 2)
-                {
-                    direction = -DIRECTION_VALUE;
-                }
-                else if (Rotation < -3.1415 / 2)
-                {
-                    direction = DIRECTION_VALUE;
-                }
-                Rotate(direction);
-                AddVelocity(1f);
+                Rotate(DIRECTION_VALUE);
             }
             frameCount++;
         }
@@ -59,9 +44,6 @@ namespace Exercice5
             double closerDistance = 1000;
             Vector2 closerPosition = Vector2.Zero;
 
-            double playerDistance = 1000;
-            Vector2 playerPosition = Vector2.Zero;
-
             foreach (Object2D movableObject in movableObjects)
             {
                 if (movableObject != this)
@@ -70,11 +52,6 @@ namespace Exercice5
                     double y = movableObject.Position.Y - Position.Y;
                     double distance = Math.Sqrt(y * y + x * x);
 
-                    if (movableObject.GetType() == typeof(Player))
-                    {
-                        playerDistance = distance;
-                        playerPosition = movableObject.Position;
-                    }
                     if (distance < closerDistance)
                     {
                         closerDistance = distance;
@@ -82,16 +59,7 @@ namespace Exercice5
                     }
                 }
             }
-
-            if (playerDistance < 300)
-            {
-                return Shoot((float)Math.Asin(playerPosition.Y / playerDistance));
-            }
-            else if (closerDistance < 300)
-            {
-                return Shoot((float)Math.Asin(closerPosition.Y / closerDistance));
-            }
-            return null;
+        return Shoot(Rotation);
         }
     }
 }
