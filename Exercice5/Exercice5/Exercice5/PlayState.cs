@@ -22,11 +22,32 @@ namespace Exercice5
             content = _content;
             AsteroidFactory.SetContent(_content);
             EnemyFactory.SetContent(_content);
-            scene = new Scene();
             input = AsteroidGame.input;
 
+            // Create scene
+            scene = new Scene();
+            UIContainer uiContainer = new UIContainer();
+            scene.Initialize(uiContainer);
+
+            // Add UI elements.
+            UIImage scoreBackground = new UIImage();
+            scoreBackground.Initialize(new Sprite(content.Load<Texture2D>("Graphics\\hud"), 1f), new Vector2(200, 0));
+            uiContainer.AddElement(scoreBackground);
+            UIText scoreText = new UIText();
+            scoreText.Initialize(content.Load<SpriteFont>("Font\\MainFont"), "0", new Vector2(100, 0));
+            uiContainer.AddElement(scoreText);
+
             // Player
-            Player.GetInstance().Initialize(new Sprite(content.Load<Texture2D>("Graphics\\ship"), 0.3f), new Vector2(500, 300), new Sprite(content.Load<Texture2D>("Graphics\\ship"), 0.05f));
+            Player.GetInstance().Initialize(new Sprite(content.Load<Texture2D>("Graphics\\ship"), 0.3f), new Vector2(500, 300));
+            for (int i = 0; i < Player.MAX_NB_BULLETS; i++)
+            {
+                Bullet bullet = new Bullet();
+                bullet.Initialize(new Sprite(content.Load<Texture2D>("Graphics\\ship"), 0.05f), Player.GetInstance().Position);
+                bullet.AddVelocity(5f);
+                bullet.AddObserver(Player.GetInstance());
+                bullet.AddObserver(scoreText);
+                Player.GetInstance().StoreBullet(bullet);
+            }
 
             // Asteroid
             Asteroid asteroid = AsteroidFactory.createNewAsteroid(1, Vector2.Zero, RandomGenerator.GetRandomFloat(0, 3.1415));
@@ -34,7 +55,7 @@ namespace Exercice5
             //Enemy
             Enemy enemy = EnemyFactory.createEnemy(1, Vector2.Zero);
             Enemy largeEnemy = EnemyFactory.createEnemy(2, new Vector2(0, 0));
-            Enemy specialEnemy = EnemyFactory.createEnemy(3, new Vector2(600, 200));
+            Enemy specialEnemy = EnemyFactory.createEnemy(3, new Vector2(200, 200));
 
             // Bonus
             Bonus shrinkBonus = new Bonus(Bonus.Type.BIGGER_BULLETS);
