@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Exercice5
 {
-    public class SmallEnemy : Enemy
+    class LargeEnemy : Enemy
     {
         private int frameCount = 0;
         private float direction;
@@ -59,9 +59,6 @@ namespace Exercice5
             double closerDistance = 1000;
             Vector2 closerPosition = Vector2.Zero;
 
-            double playerDistance = 1000;
-            Vector2 playerPosition = Vector2.Zero;
-
             foreach (Object2D movableObject in movableObjects)
             {
                 if (movableObject != this)
@@ -70,11 +67,6 @@ namespace Exercice5
                     double y = movableObject.Position.Y - Position.Y;
                     double distance = Math.Sqrt(y * y + x * x);
 
-                    if (movableObject.GetType() == typeof(Player))
-                    {
-                        playerDistance = distance;
-                        playerPosition = movableObject.Position;
-                    }
                     if (distance < closerDistance)
                     {
                         closerDistance = distance;
@@ -83,13 +75,9 @@ namespace Exercice5
                 }
             }
 
-            if (playerDistance < 300)
+            if (closerDistance < 400)
             {
-                return Shoot((float)Math.Asin(playerPosition.Y / playerDistance));
-            }
-            else if (closerDistance < 300)
-            {
-                return Shoot((float)Math.Asin(closerPosition.Y / closerDistance));
+                return Shoot((float)Math.Asin(closerPosition.Y / closerDistance) + RandomGenerator.GetRandomFloat(-1f,1f));
             }
             return null;
         }

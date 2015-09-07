@@ -97,7 +97,7 @@ namespace Exercice5
 
         public override void HasCollided(ICollidable _other)
         {
-            if (_other.GetType() != typeof(Player) && _other.GetType() != typeof(Bullet))
+            if (_other != shooter && _other.GetType() != typeof(Bullet))
             {
                 drawn = false;
             }

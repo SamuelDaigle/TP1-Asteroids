@@ -37,6 +37,13 @@ namespace Exercice5
         protected override void Initialize()
         {
             InitGraphicsMode(1024, 768, false);
+
+            screenBox = new BoundingBox();
+            screenBox.Min.X = 0;
+            screenBox.Min.Y = 0;
+            screenBox.Max.X = graphics.GraphicsDevice.Viewport.Width;
+            screenBox.Max.Y = graphics.GraphicsDevice.Viewport.Height;
+
             base.Initialize();
         }
 
@@ -44,6 +51,7 @@ namespace Exercice5
         {
             // If we aren't using a full screen mode, the height and width of the window can
             // be set to anything equal to or smaller than the actual screen size.
+
             if (fullScreen == false)
             {
                 if ((width <= GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width)
@@ -76,13 +84,6 @@ namespace Exercice5
                     //}
                 }
             }
-
-            screenBox = new BoundingBox();
-            screenBox.Min.X = 0;
-            screenBox.Min.Y = 0;
-            screenBox.Max.X = graphics.GraphicsDevice.Viewport.Width;
-            screenBox.Max.Y = graphics.GraphicsDevice.Viewport.Height;
-
             return false;
         }
 
