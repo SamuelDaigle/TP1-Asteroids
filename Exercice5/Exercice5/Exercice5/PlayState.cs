@@ -33,6 +33,8 @@ namespace Exercice5
 
             //Enemy
             Enemy enemy = EnemyFactory.createEnemy(1, Vector2.Zero);
+            Enemy largeEnemy = EnemyFactory.createEnemy(2, new Vector2(0, 0));
+            Enemy specialEnemy = EnemyFactory.createEnemy(3, new Vector2(600, 200));
 
             // Bonus
             Bonus shrinkBonus = new Bonus(Bonus.Type.BIGGER_BULLETS);
@@ -41,9 +43,11 @@ namespace Exercice5
 
             // Add all previous objects to scene.
             scene.AddDrawableObject(Player.GetInstance());
-            scene.AddDrawableObject(asteroid);
+            //scene.AddDrawableObject(asteroid);
             scene.AddDrawableObject(shrinkBonus);
-            scene.AddDrawableObject(enemy);
+            //scene.AddDrawableObject(enemy);
+            //scene.AddDrawableObject(largeEnemy);
+            //scene.AddDrawableObject(specialEnemy);
         }
 
         public void Update()

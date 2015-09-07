@@ -12,14 +12,14 @@ namespace Exercice5
         private Vector2 velocity;
         private Queue<Bullet> bullets;
         private DateTime lastShot = DateTime.Now;
-        private TimeSpan shootingDelay = new TimeSpan(0, 0, 3);
+        private TimeSpan shootingDelay = new TimeSpan(0, 0, 0, 1, 500);
         private readonly int MAX_NB_BULLETS = 3;
 
         public void Initialize(Sprite _sprite, Vector2 _position, Sprite _bulletSprite)
         {
             bullets = new Queue<Bullet>();
             base.Initialize(_sprite, _position);
-            AddVelocity(4f);
+            AddVelocity(1f);
             for (int i = 0; i < MAX_NB_BULLETS; i++)
             {
                 Bullet bullet = new Bullet();

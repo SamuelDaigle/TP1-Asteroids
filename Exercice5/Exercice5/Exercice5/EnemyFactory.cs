@@ -19,8 +19,22 @@ namespace Exercice5
 
         public static Enemy createEnemy(int _enemyType, Vector2 _position)
         {
-            Enemy enemy = new SmallEnemy();
-            enemy.Initialize(new Sprite(content.Load<Texture2D>("Graphics\\asteroid"), 0.1f), _position, new Sprite(content.Load<Texture2D>("Graphics\\ship"), 0.2f));
+            Enemy enemy = null;
+            switch (_enemyType)
+            {
+                case 1:
+                    enemy = new SmallEnemy();
+                    enemy.Initialize(new Sprite(content.Load<Texture2D>("Graphics\\asteroid"), 0.1f), _position, new Sprite(content.Load<Texture2D>("Graphics\\ship"), 0.2f));
+                    break;
+                case 2:
+                    enemy = new LargeEnemy();
+                    enemy.Initialize(new Sprite(content.Load<Texture2D>("Graphics\\asteroid"), 0.3f), _position, new Sprite(content.Load<Texture2D>("Graphics\\ship"), 0.2f));
+                    break;
+                case 3:
+                    enemy = new SpecialEnemy();
+                    enemy.Initialize(new Sprite(content.Load<Texture2D>("Graphics\\asteroid"), 0.1f), _position, new Sprite(content.Load<Texture2D>("Graphics\\ship"), 0.2f));
+                    break;
+            }
             return enemy;
         }
     }
