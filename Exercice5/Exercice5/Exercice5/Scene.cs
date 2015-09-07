@@ -11,6 +11,12 @@ namespace Exercice5
     {
         private List<Object2D> drawableObjects = new List<Object2D>();
         Stack<Asteroid> asteroidsToCreate = new Stack<Asteroid>();
+        private UIContainer uiContainer;
+
+        public void Initialize(UIContainer _uiContainer)
+        {
+            uiContainer = _uiContainer;
+        }
 
         public void AddDrawableObject(Object2D drawableObject)
         {
@@ -204,7 +210,7 @@ namespace Exercice5
             {
                 drawable.Draw(renderer);
             }
-
+            uiContainer.Draw(renderer);
         }
     }
 }
