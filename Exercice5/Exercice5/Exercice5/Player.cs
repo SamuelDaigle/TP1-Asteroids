@@ -102,7 +102,7 @@ namespace Exercice5
         public void AddVelocity(float _speed)
         {
             if (_speed < 0)
-                velocity /= 2;
+                _speed /= 2;
             velocity += (new Vector2((float)Math.Cos(sprite.Rotation), (float)Math.Sin(sprite.Rotation)) * _speed);
         }
 
@@ -192,6 +192,14 @@ namespace Exercice5
                 {
                     sprite.Draw(renderer, position);
                 }
+            }
+        }
+
+        private void CheckIfDead()
+        {
+            if (lifeCount == 0)
+            {
+                XMLScoreWriter writer = new XMLScoreWriter();
             }
         }
     }

@@ -80,12 +80,15 @@ namespace Exercice5
 
         public void Update()
         {
-            scene.Update(AsteroidGame.screenBox);
-
-            if (scene.onlyHasPlayer())
+            if (!paused)
             {
-                AsteroidGame.gameState = new PlayState(level + 1);
-                AsteroidGame.gameState.LoadContent(content);
+                scene.Update(AsteroidGame.screenBox);
+
+                if (scene.onlyHasPlayer())
+                {
+                    AsteroidGame.gameState = new PlayState(level + 1);
+                    AsteroidGame.gameState.LoadContent(content);
+                }
             }
         }
 
@@ -100,6 +103,17 @@ namespace Exercice5
                 else
                 {
                     HandleKeyboardInput();
+                }
+            }
+            if (input.IsInputPressed(Keys.P))
+            {
+                if (paused)
+                {
+                    paused = false;
+                }
+                else
+                {
+                    paused = true;
                 }
             }
         }
