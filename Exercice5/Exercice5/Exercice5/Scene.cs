@@ -37,11 +37,11 @@ namespace Exercice5
 
             List<Bullet> bulletsToAdd = new List<Bullet>();
 
-            foreach(Enemy enemy in drawableObjects.OfType<Enemy>())
+            foreach (Enemy enemy in drawableObjects.OfType<Enemy>())
             {
                 bulletsToAdd.Add(enemy.chooseToAttack(drawableObjects));
             }
-            foreach(Bullet bullet in bulletsToAdd)
+            foreach (Bullet bullet in bulletsToAdd)
             {
                 if (bullet != null)
                 {
@@ -68,30 +68,7 @@ namespace Exercice5
                     other = drawableObjects.ElementAt(j);
                     if (collidableObject.GetCollision().Intersects(other.GetCollision()))
                     {
-                        if (collidableObject.GetType() == typeof(LargeAsteroid) || other.GetType() == typeof(LargeAsteroid))
-                        {
-                            try
-                            {
-                                createNewAsteroids((Asteroid)collidableObject, other);
-
-                            }
-                            catch
-                            {
-                                createNewAsteroids((Asteroid)other, collidableObject);
-                            }
-                        }
-                        else if (collidableObject.GetType() == typeof(MediumAsteroid) || other.GetType() == typeof(MediumAsteroid))
-                        {
-                            try
-                            {
-                                createNewAsteroids((Asteroid)collidableObject, other);
-
-                            }
-                            catch
-                            {
-                                createNewAsteroids((Asteroid)other, collidableObject);
-                            }
-                        }
+                        asteroidCollision(collidableObject, other);
                         collidableObject.HasCollided(other);
                         other.HasCollided(collidableObject);
                     }
@@ -104,21 +81,85 @@ namespace Exercice5
             asteroidsToCreate.Clear();
         }
 
+        private void asteroidCollision(ICollidable collidableObject, ICollidable _other)
+        {
+            if (collidableObject.GetType() == typeof(LargeAsteroid) || _other.GetType() == typeof(LargeAsteroid))
+            {
+                try
+                {
+                    createNewAsteroids((Asteroid)collidableObject, _other);
+
+                }
+                catch
+                {
+                    createNewAsteroids((Asteroid)_other, collidableObject);
+                }
+            }
+            else if (collidableObject.GetType() == typeof(MediumAsteroid) || _other.GetType() == typeof(MediumAsteroid))
+            {
+                try
+                {
+                    createNewAsteroids((Asteroid)collidableObject, _other);
+
+                }
+                catch
+                {
+                    createNewAsteroids((Asteroid)_other, collidableObject);
+                }
+            }
+        }
+
         private void createNewAsteroids(Asteroid asteroid, ICollidable other)
         {
             if (other.GetType() == typeof(Bullet))
             {
+                float[] rotationsValue = CalculateNewRotations(asteroid, (Bullet)other);
                 if (asteroid.GetType() == typeof(LargeAsteroid))
                 {
-                    asteroidsToCreate.Push(AsteroidFactory.createNewAsteroid(2, asteroid.Position));
-                    asteroidsToCreate.Push(AsteroidFactory.createNewAsteroid(2, asteroid.Position));
+                    asteroidsToCreate.Push(AsteroidFactory.createNewAsteroid(2, asteroid.Position, rotationsValue[0] + asteroid.Rotation));
+                    asteroidsToCreate.Push(AsteroidFactory.createNewAsteroid(2, asteroid.Position, rotationsValue[1] + asteroid.Rotation));
                 }
                 else if (asteroid.GetType() == typeof(MediumAsteroid))
                 {
-                    asteroidsToCreate.Push(AsteroidFactory.createNewAsteroid(3, asteroid.Position));
-                    asteroidsToCreate.Push(AsteroidFactory.createNewAsteroid(3, asteroid.Position));
+                    asteroidsToCreate.Push(AsteroidFactory.createNewAsteroid(3, asteroid.Position, rotationsValue[0] + asteroid.Rotation));
+                    asteroidsToCreate.Push(AsteroidFactory.createNewAsteroid(3, asteroid.Position, rotationsValue[1] + asteroid.Rotation));
                 }
             }
+        }
+
+        private float[] CalculateNewRotations(Asteroid asteroid, Bullet bullet)
+        {
+            float[] returnedValues = new float[2] { 0, 0 };
+            float PI = 3.1415f;
+
+            float bulletRotation = bullet.Rotation % (2 * PI);
+            float asteroidRotation = asteroid.Rotation % (2 * PI);
+
+            if ((bulletRotation >= asteroidRotation - PI / 4) && (bulletRotation < asteroidRotation + PI / 4))
+            {
+                //Bullet comes from behind
+                returnedValues[0] = PI / 4;
+                returnedValues[1] = -PI / 4;
+            }
+            else if ((bulletRotation >= asteroidRotation - 5 * PI / 4) && (bulletRotation < asteroidRotation + 3 * PI / 4))
+            {
+                //Bullet comes from the front
+                returnedValues[0] = PI / 2;
+                returnedValues[1] = -PI / 2;
+            }
+            else if ((bulletRotation >= asteroidRotation + PI / 4) && (bulletRotation < asteroidRotation + 3 * PI / 4))
+            {
+                //Bullet comes from the right
+                returnedValues[0] = -PI / 4;
+                returnedValues[1] = 0;
+            }
+            else
+            {
+                //Bullet comes from the left
+                returnedValues[0] = PI / 4;
+                returnedValues[1] = 0;
+            }
+            return returnedValues;
         }
 
         private void CheckIfDeleted()
