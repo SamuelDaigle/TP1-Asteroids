@@ -100,6 +100,8 @@
     <Compile Include="SmallAsteroid.cs" />
     <Compile Include="SmallEnemy.cs" />
     <Compile Include="Sprite.cs" />
+    <Compile Include="UIContainer.cs" />
+    <Compile Include="UIElement.cs" />
     <Compile Include="XMLScoreReader.cs" />
     <Compile Include="XMLScoreWriter.cs" />
   </ItemGroup>

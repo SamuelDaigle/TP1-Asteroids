@@ -69,11 +69,6 @@ namespace Exercice5
             sprite.Rotate(angle);
         }
 
-        public Vector2 GetPosition()
-        {
-            return position;
-        }
-
         public bool IsDrawn()
         {
             return drawn;

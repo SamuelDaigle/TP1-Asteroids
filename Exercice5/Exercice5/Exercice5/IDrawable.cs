@@ -11,8 +11,6 @@ namespace Exercice5
     {
         void Draw(SpriteBatch renderer);
 
-        Vector2 GetPosition();
-
         Vector2 GetDimension();
 
         bool IsDrawn();

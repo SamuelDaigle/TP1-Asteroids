@@ -22,8 +22,17 @@ namespace Exercice5
             content = _content;
             AsteroidFactory.SetContent(_content);
             EnemyFactory.SetContent(_content);
-            scene = new Scene();
             input = AsteroidGame.input;
+
+            // Create scene
+            scene = new Scene();
+            UIContainer uiContainer = new UIContainer();
+            scene.Initialize(uiContainer);
+
+            // Add UI elements.
+            UIElement scoreBackground = new UIElement();
+            scoreBackground.Initialize(new Sprite(content.Load<Texture2D>("Graphics\\explosion1"), 5f), new Vector2(0, 0));
+            uiContainer.AddElement(scoreBackground);
 
             // Player
             Player.GetInstance().Initialize(new Sprite(content.Load<Texture2D>("Graphics\\ship"), 0.3f), new Vector2(500, 300), new Sprite(content.Load<Texture2D>("Graphics\\ship"), 0.05f));
