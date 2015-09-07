@@ -35,6 +35,10 @@ namespace Exercice5
 
         public float Rotation
         {
+            get
+            {
+                return sprite.Rotation;
+            }
             set
             {
                 sprite.Rotation = value;
