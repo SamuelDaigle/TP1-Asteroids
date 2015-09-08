@@ -34,15 +34,8 @@ namespace Exercice5
             LevelLoader levelLoader = new LevelLoader(level);
             scene = levelLoader.GetScene();
             UIContainer uiContainer = new UIContainer();
+            uiContainer.LoadContent(content);
             scene.Initialize(uiContainer, content);
-
-            // Add UI elements.
-            UIImage scoreBackground = new UIImage();
-            scoreBackground.Initialize(new Sprite(content.Load<Texture2D>("Graphics\\hud"), 1f), new Vector2(200, 0));
-            uiContainer.AddElement(scoreBackground);
-            UIText scoreText = new UIText();
-            scoreText.Initialize(content.Load<SpriteFont>("Font\\MainFont"), "0", new Vector2(100, 0));
-            uiContainer.AddElement(scoreText);
 
             // Player
             Player.GetInstance().Initialize(content, new Sprite(content.Load<Texture2D>("Graphics\\ship"), 0.3f), new Vector2(500, 300));
@@ -51,8 +44,7 @@ namespace Exercice5
                 Bullet bullet = new Bullet();
                 bullet.Initialize(new Sprite(content.Load<Texture2D>("Graphics\\ship"), 0.05f), Player.GetInstance().Position);
                 bullet.AddVelocity(5f);
-                bullet.AddObserver(Player.GetInstance());
-                bullet.AddObserver(scoreText);
+                bullet.AddScoreObserver(Player.GetInstance());
                 Player.GetInstance().StoreBullet(bullet);
             }
 
@@ -64,7 +56,7 @@ namespace Exercice5
             // Bonus
             Bonus shrinkBonus = new Bonus(Bonus.Type.BIGGER_BULLETS);
             shrinkBonus.Initialize(new Sprite(content.Load<Texture2D>("Graphics\\ship"), 0.3f), new Vector2(700, 500));
-            shrinkBonus.AddObserver(Player.GetInstance());
+            shrinkBonus.AddBonusObserver(Player.GetInstance());
 
             // Add all previous objects to scene.
             scene.AddDrawableObject(Player.GetInstance());

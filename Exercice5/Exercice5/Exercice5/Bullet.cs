@@ -52,7 +52,7 @@ namespace Exercice5
             lifeTime = new TimeSpan(0, 0, 1);
         }
 
-        public void AddObserver(IScoreObserver _observer)
+        public void AddScoreObserver(IScoreObserver _observer)
         {
             scoreObservers.Add(_observer);
         }
