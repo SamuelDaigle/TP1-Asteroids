@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Exercice5
 {
-    public class UIText : IUIElement, IScoreObserver
+    public class UIText : IUIElement, ITextObserver
     {
         private SpriteFont spriteFont;
         private string text;
@@ -49,9 +49,9 @@ namespace Exercice5
             
         }
 
-        public void AddScore(int _score)
+        public void SetText(string _text)
         {
-            text = (Convert.ToInt32(text) + _score).ToString();
+            text = _text;
         }
     }
 }

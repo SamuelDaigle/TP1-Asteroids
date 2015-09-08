@@ -46,6 +46,8 @@ namespace Exercice5
 
         public void Update(BoundingBox screen)
         {
+            uiContainer.Update();
+
             foreach (IMovable sprite in drawableObjects.OfType<IMovable>())
             {
                 sprite.Update(screen);

@@ -9,7 +9,7 @@ namespace Exercice5
 {
     public class Object2D : IDrawable, ICollidable, IBonusObserver
     {
-        protected List<IBonusObserver> observers;
+        protected List<IBonusObserver> bonusObservers;
         protected BoundingSphere collisionSphere;
         protected Vector2 position;
         protected Sprite sprite;
@@ -39,9 +39,9 @@ namespace Exercice5
             }
         }
 
-        public void AddObserver(IBonusObserver _observer)
+        public void AddBonusObserver(IBonusObserver _observers)
         {
-            observers.Add(_observer);
+            bonusObservers.Add(_observers);
         }
 
         public virtual void Initialize(Sprite _sprite, Vector2 _position)
@@ -50,7 +50,7 @@ namespace Exercice5
             position = _position;
             drawn = true;
             collisionSphere = new BoundingSphere(new Vector3(_position, 0), _sprite.GetDimension().X / 2);
-            observers = new List<IBonusObserver>();
+            bonusObservers = new List<IBonusObserver>();
         }
 
         public virtual void Draw(SpriteBatch renderer)

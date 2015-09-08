@@ -23,7 +23,7 @@ namespace Exercice5
             while (reader.ReadToFollowing("ScoreSave"))
             {
                 Score score = new Score();
-                reader.ReadToFollowing("Name");
+                reader.ReadToFollowing("Player");
                 score.name = reader.ReadElementContentAsString();
                 reader.ReadToFollowing("Score");
                 score.score = reader.ReadElementContentAsInt();
