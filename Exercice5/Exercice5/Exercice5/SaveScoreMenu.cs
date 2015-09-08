@@ -61,7 +61,10 @@ namespace Exercice5
                 }
                 else if (name.Length <= 10)
                 {
-                    name += key.ToString();
+                    if (key.ToString().Length == 1)
+                    {
+                        name += key.ToString();
+                    }
                 }
             }
         }
