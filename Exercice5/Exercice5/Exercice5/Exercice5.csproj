@@ -85,6 +85,7 @@
     <Compile Include="Level.cs" />
     <Compile Include="MediumAsteroid.cs" />
     <Compile Include="Random.cs" />
+    <Compile Include="SaveScoreMenu.cs" />
     <Compile Include="Score.cs" />
     <Compile Include="LeaderboardState.cs" />
     <Compile Include="PlayState.cs" />
