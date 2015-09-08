@@ -11,7 +11,6 @@ namespace Exercice5
 
         public static float GetRandomFloat(double _min, double _max)
         {
-            Random random = new Random();
             return (float)(random.NextDouble() * (_max - _min) + _min);
         }
 

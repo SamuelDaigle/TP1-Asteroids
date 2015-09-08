@@ -21,7 +21,9 @@ namespace Exercice5
 
             for (int i = 0; i < 3 + level; i++)
             {
-                scene.AddDrawableObject(AsteroidFactory.createNewAsteroid(1, Vector2.Zero, RandomGenerator.GetRandomFloat(0f, 2f)));
+                Asteroid asteroid = AsteroidFactory.createNewAsteroid(1, Vector2.Zero, RandomGenerator.GetRandomFloat(0f, 6.28f));
+                asteroid.AddObserver(scene);
+                scene.AddDrawableObject(asteroid);
             }
 
             return scene;

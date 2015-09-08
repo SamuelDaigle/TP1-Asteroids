@@ -34,7 +34,7 @@ namespace Exercice5
             LevelLoader levelLoader = new LevelLoader(level);
             scene = levelLoader.GetScene();
             UIContainer uiContainer = new UIContainer();
-            scene.Initialize(uiContainer);
+            scene.Initialize(uiContainer, content);
 
             // Add UI elements.
             UIImage scoreBackground = new UIImage();
@@ -56,9 +56,6 @@ namespace Exercice5
                 Player.GetInstance().StoreBullet(bullet);
             }
 
-            // Asteroid
-            Asteroid asteroid = AsteroidFactory.createNewAsteroid(1, Vector2.Zero, RandomGenerator.GetRandomFloat(0, 3.1415));
-
             //Enemy
             Enemy enemy = EnemyFactory.createEnemy(1, Vector2.Zero);
             Enemy largeEnemy = EnemyFactory.createEnemy(2, new Vector2(0, 0));
@@ -71,7 +68,6 @@ namespace Exercice5
 
             // Add all previous objects to scene.
             scene.AddDrawableObject(Player.GetInstance());
-            scene.AddDrawableObject(asteroid);
             scene.AddDrawableObject(shrinkBonus);
             //scene.AddDrawableObject(enemy);
             //scene.AddDrawableObject(largeEnemy);

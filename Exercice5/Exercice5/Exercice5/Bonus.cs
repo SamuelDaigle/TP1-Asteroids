@@ -7,7 +7,7 @@ namespace Exercice5
 {
     public class Bonus : Object2D
     {
-        public enum Type { SHRINK, BIGGER_BULLETS, STOP_TIME, EXPLODE_WAVE, ASTEROID_EXPLODE, MORE_ENEMIES}
+        public enum Type { SHRINK, BIGGER_BULLETS, STOP_TIME, SCORE_TWICE, ASTEROID_EXPLODE}
 
         private Type type;
 
