@@ -36,4 +36,8 @@
     <Player>SAM</Player>
     <Score>2450</Score>
   </ScoreSave>
+  <ScoreSave>
+    <Player>SEB</Player>
+    <Score>9100</Score>
+  </ScoreSave>
 </Table>

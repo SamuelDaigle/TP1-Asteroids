@@ -15,6 +15,8 @@ namespace Exercice5
         protected Scene scene;
         protected ContentManager content;
         protected InputHandler input;
+        private TimeSpan objectSpawningDelay = new TimeSpan(0, 0, 15);
+        private DateTime timeLastObjectSpawned = DateTime.Now;
         private bool exit = false;
         private bool paused = false;
 
@@ -47,26 +49,7 @@ namespace Exercice5
                 bullet.AddScoreObserver(Player.GetInstance());
                 Player.GetInstance().StoreBullet(bullet);
             }
-
-            //Enemy
-            Enemy enemy = EnemyFactory.createEnemy(1, Vector2.Zero);
-            Enemy largeEnemy = EnemyFactory.createEnemy(2, new Vector2(0, 0));
-            Enemy specialEnemy = EnemyFactory.createEnemy(3, new Vector2(200, 200));
-
-            // Bonus
-            Bonus shrinkBonus = new Bonus(Bonus.Type.ASTEROID_EXPLODE);
-            shrinkBonus.Initialize(new Sprite(content.Load<Texture2D>("Graphics\\ship"), 0.3f), new Vector2(700, 500));
-            foreach (Asteroid asteroid in scene.GetAllAsteroids())
-            {
-                shrinkBonus.AddBonusObserver(asteroid);
-            }
-
-            // Add all previous objects to scene.
             scene.AddDrawableObject(Player.GetInstance());
-            scene.AddDrawableObject(shrinkBonus);
-            //scene.AddDrawableObject(enemy);
-            //scene.AddDrawableObject(largeEnemy);
-            //scene.AddDrawableObject(specialEnemy);
         }
 
         public void Update()
@@ -74,6 +57,48 @@ namespace Exercice5
             if (!paused)
             {
                 scene.Update(AsteroidGame.screenBox);
+
+                if (DateTime.Now - timeLastObjectSpawned >= objectSpawningDelay)
+                {
+                    timeLastObjectSpawned = DateTime.Now;
+                    Bonus bonus = null;
+                    switch (RandomGenerator.GetRandomInt(0, 4))
+                    {
+                        case 0:
+                            bonus = new Bonus(Bonus.Type.SHRINK);
+                            bonus.Initialize(new Sprite(content.Load<Texture2D>("Graphics\\ship"), 0.3f), new Vector2(700, 500));
+                            bonus.AddBonusObserver(Player.GetInstance());
+                            break;
+                        case 1:
+                            bonus = new Bonus(Bonus.Type.BIGGER_BULLETS);
+                            bonus.Initialize(new Sprite(content.Load<Texture2D>("Graphics\\ship"), 0.3f), new Vector2(700, 500));
+                            bonus.AddBonusObserver(Player.GetInstance());
+                            break;
+                        case 2:
+                            bonus = new Bonus(Bonus.Type.STOP_TIME);
+                            bonus.Initialize(new Sprite(content.Load<Texture2D>("Graphics\\ship"), 0.3f), new Vector2(700, 500));
+                            foreach(Asteroid asteroid in scene.GetAllAsteroids())
+                            {
+                                bonus.AddBonusObserver(asteroid);
+                            }
+                            break;
+                        case 3:
+                            bonus = new Bonus(Bonus.Type.ASTEROID_EXPLODE);
+                            bonus.Initialize(new Sprite(content.Load<Texture2D>("Graphics\\ship"), 0.3f), new Vector2(700, 500));
+                            foreach (Asteroid asteroid in scene.GetAllAsteroids())
+                            {
+                                bonus.AddBonusObserver(asteroid);
+                            }
+                            break;
+                        case 4:
+                            bonus = new Bonus(Bonus.Type.SCORE_TWICE);
+                            bonus.Initialize(new Sprite(content.Load<Texture2D>("Graphics\\ship"), 0.3f), new Vector2(700, 500));
+                            bonus.AddBonusObserver(Player.GetInstance());
+                            break;
+                    }
+                    scene.AddDrawableObject(bonus);
+                    scene.AddDrawableObject(EnemyFactory.createEnemy(RandomGenerator.GetRandomInt(1, 3), Vector2.Zero));
+                }
 
                 if (scene.onlyHasPlayer())
                 {
