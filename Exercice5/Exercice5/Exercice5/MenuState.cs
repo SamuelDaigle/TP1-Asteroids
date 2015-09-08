@@ -118,7 +118,7 @@ namespace Exercice5
         {
             if (selectedOption == 0)
             {
-                AsteroidGame.gameState = new PlayState();
+                AsteroidGame.gameState = new PlayState(1);
                 AsteroidGame.gameState.LoadContent(content);
             }
 

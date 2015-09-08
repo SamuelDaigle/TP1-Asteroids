@@ -11,11 +11,17 @@ namespace Exercice5
 {
     public class PlayState : IGameState
     {
+        protected int level;
         protected Scene scene;
         protected ContentManager content;
         protected InputHandler input;
         private bool exit = false;
         private bool paused = false;
+
+        public PlayState(int _level)
+        {
+            level = _level;
+        }
 
         public void LoadContent(ContentManager _content)
         {
@@ -25,7 +31,8 @@ namespace Exercice5
             input = AsteroidGame.input;
 
             // Create scene
-            scene = new Scene();
+            LevelLoader levelLoader = new LevelLoader(level);
+            scene = levelLoader.GetScene();
             UIContainer uiContainer = new UIContainer();
             scene.Initialize(uiContainer);
 
@@ -73,7 +80,16 @@ namespace Exercice5
 
         public void Update()
         {
-            scene.Update(AsteroidGame.screenBox);
+            if (!paused)
+            {
+                scene.Update(AsteroidGame.screenBox);
+
+                if (scene.onlyHasPlayer())
+                {
+                    AsteroidGame.gameState = new PlayState(level + 1);
+                    AsteroidGame.gameState.LoadContent(content);
+                }
+            }
         }
 
         public void HandleInput()
@@ -87,6 +103,17 @@ namespace Exercice5
                 else
                 {
                     HandleKeyboardInput();
+                }
+            }
+            if (input.IsInputPressed(Keys.P))
+            {
+                if (paused)
+                {
+                    paused = false;
+                }
+                else
+                {
+                    paused = true;
                 }
             }
         }

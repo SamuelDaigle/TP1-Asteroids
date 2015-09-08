@@ -15,6 +15,9 @@ namespace Exercice5
         private readonly float MAX_VELOCITY = 7f;
         public static readonly int MAX_NB_BULLETS = 15;
         private int score;
+        private int lifeCount;
+        private DateTime invulnerabilityStart;
+        private bool isInvulnerable;
 
         public static Player GetInstance()
         {
@@ -30,6 +33,9 @@ namespace Exercice5
         {
             bullets = new Queue<Bullet>();
             score = 0;
+            lifeCount = 1;
+            invulnerabilityStart = DateTime.MinValue;
+            isInvulnerable = false;
         }
 
         public void StoreBullet(Bullet _bullet)
@@ -54,6 +60,11 @@ namespace Exercice5
             collisionSphere.Radius = GetDimension().X / 2;
             collisionSphere.Center.X = position.X + GetDimension().X / 2;
             collisionSphere.Center.Y = position.Y + GetDimension().Y / 2;
+
+            if (isInvulnerable && invulnerabilityStart + TimeSpan.FromSeconds(5) < DateTime.Now)
+            {
+                isInvulnerable = false;
+            }
 
             StayInBounds(screen);
         }
@@ -91,21 +102,31 @@ namespace Exercice5
         public void AddVelocity(float _speed)
         {
             if (_speed < 0)
-                velocity /= 2;
+                _speed /= 2;
             velocity += (new Vector2((float)Math.Cos(sprite.Rotation), (float)Math.Sin(sprite.Rotation)) * _speed);
         }
 
         public override void HasCollided(ICollidable _other)
         {
-            if (_other.GetType() != typeof(Bonus))
+            if (!isInvulnerable)
             {
-                if(_other.GetType() != typeof(Bullet))
+                if (_other.GetType() != typeof(Bonus))
                 {
-                    drawn = false;
+                    if (_other.GetType() != typeof(Bullet))
+                    {
+                        drawn = false;
+                    }
+                    else if (((Bullet)_other).Shooter != this)
+                    {
+                        drawn = false;
+                    }
                 }
-                else if(((Bullet)_other).Shooter != this)
+                if (drawn == false && lifeCount > 1)
                 {
-                    drawn = false;
+                    drawn = true;
+                    lifeCount--;
+                    invulnerabilityStart = DateTime.Now;
+                    isInvulnerable = true;
                 }
             }
         }
@@ -151,6 +172,35 @@ namespace Exercice5
         public void AddScore(int _score)
         {
             score += _score;
+            if (score >= (lifeCount * 100))
+            {
+                lifeCount++;
+            }
+        }
+
+        public override void Draw(SpriteBatch renderer)
+        {
+            if (IsDrawn())
+            {
+                if (isInvulnerable)
+                {
+                    TimeSpan difference = DateTime.Now - invulnerabilityStart;
+                    if (difference.Milliseconds < 500)
+                        sprite.Draw(renderer, position);
+                }
+                else
+                {
+                    sprite.Draw(renderer, position);
+                }
+            }
+        }
+
+        private void CheckIfDead()
+        {
+            if (lifeCount == 0)
+            {
+                XMLScoreWriter writer = new XMLScoreWriter();
+            }
         }
     }
 
