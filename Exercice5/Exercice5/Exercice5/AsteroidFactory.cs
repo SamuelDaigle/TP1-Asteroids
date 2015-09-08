@@ -26,14 +26,17 @@ namespace Exercice5
             {
                 case 1:
                     asteroid = new LargeAsteroid();
+                    asteroid.Initialize(new Sprite(content.Load<Texture2D>("Graphics\\asteroid"), scale), _position);
                     break;
                 case 2:
                     asteroid = new MediumAsteroid();
                     scale = 0.4f;
+                    asteroid.Initialize(new Sprite(content.Load<Texture2D>("Graphics\\asteroid"), scale), _position);
                     break;
                 case 3:
                     asteroid = new SmallAsteroid();
                     scale = 0.2f;
+                    asteroid.Initialize(new Sprite(content.Load<Texture2D>("Graphics\\asteroid"), scale), _position);
                     break;
                 default:
                     asteroid = null;
@@ -41,7 +44,6 @@ namespace Exercice5
             }
             if (asteroid != null)
             {
-                asteroid.Initialize(new Sprite(content.Load<Texture2D>("Graphics\\asteroid"), scale), _position);
                 asteroid.Rotate(_rotation);
                 asteroid.AddVelocity(4f);
             }
