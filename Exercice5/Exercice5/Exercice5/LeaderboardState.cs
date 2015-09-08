@@ -23,7 +23,7 @@ namespace Exercice5
             scores = new List<Score>();
             input = AsteroidGame.input;
             XMLScoreReader reader = new XMLScoreReader();
-            reader.Load("scores.xml");
+            reader.Load("Scores.xml");
             scores = reader.GetScores();
         }
 
