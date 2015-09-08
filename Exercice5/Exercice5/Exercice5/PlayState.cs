@@ -54,9 +54,12 @@ namespace Exercice5
             Enemy specialEnemy = EnemyFactory.createEnemy(3, new Vector2(200, 200));
 
             // Bonus
-            Bonus shrinkBonus = new Bonus(Bonus.Type.BIGGER_BULLETS);
+            Bonus shrinkBonus = new Bonus(Bonus.Type.ASTEROID_EXPLODE);
             shrinkBonus.Initialize(new Sprite(content.Load<Texture2D>("Graphics\\ship"), 0.3f), new Vector2(700, 500));
-            shrinkBonus.AddBonusObserver(Player.GetInstance());
+            foreach (Asteroid asteroid in scene.GetAllAsteroids())
+            {
+                shrinkBonus.AddBonusObserver(asteroid);
+            }
 
             // Add all previous objects to scene.
             scene.AddDrawableObject(Player.GetInstance());

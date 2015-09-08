@@ -112,5 +112,25 @@ namespace Exercice5
             }
             return returnedValues;
         }
+
+        public override void AddBonus(Bonus.Type _type)
+        {
+            base.AddBonus(_type);
+            if (_type == Bonus.Type.STOP_TIME)
+            {
+                velocity = Vector2.Zero;
+            }
+            else if (_type == Bonus.Type.ASTEROID_EXPLODE)
+            {
+                Bullet fakeBullet = new Bullet();
+                fakeBullet.Initialize(sprite, position);
+                HasCollided(fakeBullet);
+            }
+        }
+
+        public void Draw(GameTime gameTime)
+        {
+            
+        }
     }
 }
