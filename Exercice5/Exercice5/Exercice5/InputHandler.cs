@@ -144,5 +144,21 @@ namespace Exercice5
             return currentGamePadState.ThumbSticks;
         }
 
+        public List<Keys> GetPressedKeys()
+        {
+            List<Keys> pressedKeys = new List<Keys>();
+            foreach (Keys key in currentKeyboardState.GetPressedKeys())
+            {
+                if (key != Keys.None)
+                {
+                    if (oldKeyboardState.IsKeyUp(key))
+                    {
+                        pressedKeys.Add(key);
+                    }
+                }  
+            }
+            return pressedKeys;
+        }
+
     }
 }

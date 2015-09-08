@@ -45,7 +45,7 @@ namespace Exercice5
             uiContainer.AddElement(scoreText);
 
             // Player
-            Player.GetInstance().Initialize(new Sprite(content.Load<Texture2D>("Graphics\\ship"), 0.3f), new Vector2(500, 300));
+            Player.GetInstance().Initialize(content, new Sprite(content.Load<Texture2D>("Graphics\\ship"), 0.3f), new Vector2(500, 300));
             for (int i = 0; i < Player.MAX_NB_BULLETS; i++)
             {
                 Bullet bullet = new Bullet();

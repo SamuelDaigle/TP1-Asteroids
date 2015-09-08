@@ -20,12 +20,12 @@ namespace Exercice5
             XmlReader reader = XmlReader.Create(_filePath);
 
             reader.MoveToContent();
-            while (reader.ReadToFollowing("Score"))
+            while (reader.ReadToFollowing("ScoreSave"))
             {
                 Score score = new Score();
                 reader.ReadToFollowing("Name");
                 score.name = reader.ReadElementContentAsString();
-                reader.ReadToFollowing("Test");
+                reader.ReadToFollowing("Score");
                 score.score = reader.ReadElementContentAsInt();
                 scores.Add(score);
             }
