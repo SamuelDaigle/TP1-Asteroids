@@ -25,11 +25,30 @@ namespace Exercice5
             XMLScoreReader reader = new XMLScoreReader();
             reader.Load("Scores.xml");
             scores = reader.GetScores();
+            arrangeTopList();
         }
 
         public void Update()
         {
             
+        }
+
+        public void arrangeTopList()
+        {
+
+            Score temp;
+            for (int i = 0; i < scores.Count; i++)
+            {
+                for (int j = 0; j < scores.Count - 1; j++)
+                {
+                    if (scores[j].score < scores[j + 1].score)
+                    {
+                        temp = scores[j + 1];
+                        scores[j + 1] = scores[j];
+                        scores[j] = temp;
+                    }
+                }
+            }
         }
 
         public void HandleInput()

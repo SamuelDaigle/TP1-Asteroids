@@ -18,7 +18,7 @@ namespace Exercice5
 
         public override void HasCollided(ICollidable _other)
         {
-            foreach (IBonusObserver observer in observers)
+            foreach (IBonusObserver observer in bonusObservers)
             {
                 if (observer.Equals(_other))
                     observer.AddBonus(type);

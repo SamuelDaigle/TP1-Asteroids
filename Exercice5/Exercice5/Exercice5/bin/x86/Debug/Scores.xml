@@ -32,4 +32,8 @@
     <Player>DFGD</Player>
     <Score>3200</Score>
   </ScoreSave>
+  <ScoreSave>
+    <Player>SAM</Player>
+    <Score>2450</Score>
+  </ScoreSave>
 </Table>

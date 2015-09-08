@@ -77,12 +77,15 @@
     <Compile Include="Bullet.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="EnemyFactory.cs" />
+    <Compile Include="IBonusObserver.cs" />
     <Compile Include="InputHandler.cs" />
+    <Compile Include="IObjectAdderObserver.cs" />
     <Compile Include="IScoreObserver.cs" />
+    <Compile Include="ITextObserver.cs" />
     <Compile Include="IUIElement.cs" />
     <Compile Include="LargeAsteroid.cs" />
     <Compile Include="LargeEnemy.cs" />
-    <Compile Include="Level.cs" />
+    <Compile Include="LevelLoader.cs" />
     <Compile Include="MediumAsteroid.cs" />
     <Compile Include="Random.cs" />
     <Compile Include="SaveScoreMenu.cs" />
@@ -93,7 +96,6 @@
     <Compile Include="IDrawable.cs" />
     <Compile Include="IGameState.cs" />
     <Compile Include="IMovable.cs" />
-    <Compile Include="IObserver.cs" />
     <Compile Include="MenuState.cs" />
     <Compile Include="Object2D.cs" />
     <Compile Include="Asteroid.cs" />

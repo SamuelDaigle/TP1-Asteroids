@@ -21,6 +21,22 @@ namespace Exercice5
         private DateTime invulnerabilityStart;
         private bool isInvulnerable;
 
+        public int Score
+        {
+            get
+            {
+                return score;
+            }
+        }
+
+        public int Life
+        {
+            get
+            {
+                return lifeCount;
+            }
+        }
+
         public static Player GetInstance()
         {
             if (instance == null)
@@ -201,6 +217,10 @@ namespace Exercice5
             }
         }
 
+        public void Draw(Microsoft.Xna.Framework.GameTime gameTime)
+        {
+            throw new NotImplementedException();
+        }
         private void CheckIfDead()
         {
             if (lifeCount == 0)
