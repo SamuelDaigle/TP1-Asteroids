@@ -25,7 +25,7 @@ namespace Exercice5
         {
             // Add UI elements.
             UIImage scoreBackground = new UIImage();
-            scoreBackground.Initialize(new Sprite(content.Load<Texture2D>("Graphics\\hud"), 1f), new Vector2(200, 0));
+            scoreBackground.Initialize(new Sprite(content.Load<Texture2D>("Graphics\\hud"), 1f), new Vector2(400, 0));
             AddElement(scoreBackground);
 
             scoreText = new UIText();
@@ -36,10 +36,10 @@ namespace Exercice5
             AddElement(scoreLabel);
 
             lifeText = new UIText();
-            lifeText.Initialize(content.Load<SpriteFont>("Font\\MainFont"), "3", new Vector2(200, 500));
+            lifeText.Initialize(content.Load<SpriteFont>("Font\\MainFont"), "3", new Vector2(550, 0));
             AddElement(lifeText);
             lifeLabel = new UIText();
-            lifeLabel.Initialize(content.Load<SpriteFont>("Font\\MainFont"), "Life", new Vector2(50, 500));
+            lifeLabel.Initialize(content.Load<SpriteFont>("Font\\MainFont"), "Life", new Vector2(400, 0));
             AddElement(lifeLabel);
         }
 

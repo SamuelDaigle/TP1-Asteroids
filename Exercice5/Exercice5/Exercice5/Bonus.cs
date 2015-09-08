@@ -20,8 +20,7 @@ namespace Exercice5
         {
             foreach (IBonusObserver observer in bonusObservers)
             {
-                if (observer.Equals(_other))
-                    observer.AddBonus(type);
+                observer.AddBonus(type);
             }
             drawn = false;
         }

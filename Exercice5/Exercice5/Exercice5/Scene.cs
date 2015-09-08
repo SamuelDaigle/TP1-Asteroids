@@ -44,6 +44,11 @@ namespace Exercice5
                 drawableObjects.Add(drawableObject);
         }
 
+        public IEnumerable<Asteroid> GetAllAsteroids()
+        {
+            return drawableObjects.OfType<Asteroid>();
+        }
+
         public void Update(BoundingBox screen)
         {
             uiContainer.Update();
