@@ -4,12 +4,14 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Content;
 
 namespace Exercice5
 {
     public class Player : Object2D, IMovable, IScoreObserver
     {
         private static Player instance = null;
+        private ContentManager content;
         private Vector2 velocity;
         private Queue<Bullet> bullets;
         private readonly float MAX_VELOCITY = 7f;
@@ -43,9 +45,10 @@ namespace Exercice5
             bullets.Enqueue(_bullet);
         }
 
-        public void Initialize(Sprite _sprite, Vector2 _position, Sprite _bulletSprite)
+        public void Initialize(ContentManager _content, Sprite _sprite, Vector2 _position)
         {
             base.Initialize(_sprite, _position);
+            content = _content;
         }
 
         public void Update(BoundingBox screen)
@@ -121,10 +124,11 @@ namespace Exercice5
                         drawn = false;
                     }
                 }
-                if (drawn == false && lifeCount > 1)
+                if (drawn == false && lifeCount >= 1)
                 {
                     drawn = true;
                     lifeCount--;
+                    CheckIfDead();
                     invulnerabilityStart = DateTime.Now;
                     isInvulnerable = true;
                 }
@@ -199,7 +203,8 @@ namespace Exercice5
         {
             if (lifeCount == 0)
             {
-                XMLScoreWriter writer = new XMLScoreWriter();
+                AsteroidGame.gameState = new SaveScoreMenu(score.ToString());
+                AsteroidGame.gameState.LoadContent(content);
             }
         }
     }
