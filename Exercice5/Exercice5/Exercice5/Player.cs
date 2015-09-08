@@ -20,6 +20,7 @@ namespace Exercice5
         private int lifeCount;
         private DateTime invulnerabilityStart;
         private bool isInvulnerable;
+        private int scoreRatio;
 
         public int Score
         {
@@ -52,6 +53,7 @@ namespace Exercice5
             bullets = new Queue<Bullet>();
             score = 0;
             lifeCount = 3;
+            scoreRatio = 1;
             invulnerabilityStart = DateTime.MinValue;
             isInvulnerable = false;
         }
@@ -187,11 +189,15 @@ namespace Exercice5
                     bullets.Enqueue(bullet);
                 }
             }
+            if (_type == Bonus.Type.SCORE_TWICE)
+            {
+                scoreRatio = 2;
+            }
         }
 
         public void AddScore(int _score)
         {
-            score += _score;
+            score += _score * scoreRatio;
             if (score >= (lifeCount * 10000))
             {
                 lifeCount++;
@@ -217,7 +223,7 @@ namespace Exercice5
             }
         }
 
-        public void Draw(Microsoft.Xna.Framework.GameTime gameTime)
+        public void Draw(GameTime gameTime)
         {
             throw new NotImplementedException();
         }
