@@ -16,6 +16,10 @@ namespace Exercice5
 
         public void WriteXML(string _playerName, string _score)
         {
+            if(_playerName == "")
+            {
+                _playerName = " ";
+            }
             try
             {
                 XmlDocument myDoc = new XmlDocument();
