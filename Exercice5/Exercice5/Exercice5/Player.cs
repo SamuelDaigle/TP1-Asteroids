@@ -35,7 +35,7 @@ namespace Exercice5
         {
             bullets = new Queue<Bullet>();
             score = 0;
-            lifeCount = 1;
+            lifeCount = 3;
             invulnerabilityStart = DateTime.MinValue;
             isInvulnerable = false;
         }
@@ -176,9 +176,11 @@ namespace Exercice5
         public void AddScore(int _score)
         {
             score += _score;
-            if (score >= (lifeCount * 100))
+            if (score >= (lifeCount * 10000))
             {
                 lifeCount++;
+                if (lifeCount > 3)
+                    lifeCount = 3;
             }
         }
 

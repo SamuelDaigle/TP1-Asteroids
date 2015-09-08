@@ -13,15 +13,27 @@ namespace Exercice5
         {
             if (_other.GetType() == typeof(MediumAsteroid))
             {
-                TimeSpan spawningDelay = new TimeSpan(0, 0, 3);
-                if (DateTime.Now - Birth >= spawningDelay)
+                if (isMergeable)
                 {
                     drawn = false;
+                    MediumAsteroid other = (MediumAsteroid)_other;
+                    other.isMergeable = false;
+                    other.drawn = false;
+                    foreach (IObjectAdderObserver observer in objectObservers)
+                    {
+                        observer.AddAsteroid(AsteroidFactory.createNewAsteroid(1, position, RandomGenerator.GetRandomFloat(0, 6.283)));
+                    }
                 }
             }
             else if (_other.GetType() == typeof(Bullet))
             {
                 drawn = false;
+                float[] rotationsValue = CalculateNewRotations(this, (Bullet)_other);
+                foreach (IObjectAdderObserver observer in objectObservers)
+                {
+                    observer.AddAsteroid(AsteroidFactory.createNewAsteroid(3, position, rotationsValue[0] + Rotation));
+                    observer.AddAsteroid(AsteroidFactory.createNewAsteroid(3, position, rotationsValue[1] + Rotation));
+                }
             }
         }
     }

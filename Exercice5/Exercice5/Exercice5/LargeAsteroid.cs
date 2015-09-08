@@ -14,6 +14,12 @@ namespace Exercice5
             if (_other.GetType() == typeof(Bullet))
             {
                 drawn = false;
+                float[] rotationsValue = CalculateNewRotations(this, (Bullet)_other);
+                foreach (IObjectAdderObserver observer in objectObservers)
+                {
+                    observer.AddAsteroid(AsteroidFactory.createNewAsteroid(2, position, rotationsValue[0] + Rotation));
+                    observer.AddAsteroid(AsteroidFactory.createNewAsteroid(2, position, rotationsValue[1] + Rotation));
+                }
             }
         }
     }

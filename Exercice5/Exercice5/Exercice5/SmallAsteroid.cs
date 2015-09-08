@@ -13,10 +13,16 @@ namespace Exercice5
         {
             if(_other.GetType() == typeof(SmallAsteroid))
             {
-                TimeSpan spawningDelay = new TimeSpan(0, 0, 3);
-                if (DateTime.Now - Birth >= spawningDelay)
+                if (isMergeable)
                 {
                     drawn = false;
+                    SmallAsteroid other = (SmallAsteroid)_other;
+                    other.isMergeable = false;
+                    other.drawn = false;
+                    foreach (IObjectAdderObserver observer in objectObservers)
+                    {
+                        observer.AddAsteroid(AsteroidFactory.createNewAsteroid(2, position, RandomGenerator.GetRandomFloat(0, 6.283)));
+                    }
                 }
             }
             if (_other.GetType() == typeof(Bullet))
