@@ -7,6 +7,10 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Exercice5
 {
+    /// <summary>
+    /// Class asteroid is an abstract class that represents 
+    /// one of the three possible types of asteroid (either small, medium or large).
+    /// </summary>
     public abstract class Asteroid : Object2D, IMovable
     {
         private Vector2 velocity;
@@ -15,14 +19,11 @@ namespace Exercice5
         protected List<IObjectAdderObserver> objectObservers;
         protected bool isMergeable = false;
 
-        public DateTime Birth
-        {
-            get
-            {
-                return birth;
-            }
-        }
-
+        /// <summary>
+        /// Initializes the specified _sprite.
+        /// </summary>
+        /// <param name="_sprite">The _sprite.</param>
+        /// <param name="_position">The _position.</param>
         public void Initialize(Sprite _sprite, Vector2 _position)
         {
             objectObservers = new List<IObjectAdderObserver>();
@@ -30,12 +31,20 @@ namespace Exercice5
             base.Initialize(_sprite, _position);
         }
 
+        /// <summary>
+        /// Adds the observer.
+        /// </summary>
+        /// <param name="_observer">The _observer.</param>
         public void AddObserver(IObjectAdderObserver _observer)
         {
             objectObservers.Add(_observer);
         }
 
         // IMovable
+        /// <summary>
+        /// Updates the asteroids.
+        /// </summary>
+        /// <param name="screen">The screen.</param>
         public void Update(BoundingBox screen)
         {
             position.X += (int)(velocity.X);
@@ -53,6 +62,10 @@ namespace Exercice5
             StayInBounds(screen);
         }
 
+        /// <summary>
+        /// Forces the asteroids to stay inside the screen bounds.
+        /// </summary>
+        /// <param name="screen">The screen.</param>
         private void StayInBounds(BoundingBox screen)
         {
 
@@ -73,11 +86,21 @@ namespace Exercice5
             }
         }
 
+        /// <summary>
+        /// Adds the velocity.
+        /// </summary>
+        /// <param name="_speed">The _speed.</param>
         public void AddVelocity(float _speed)
         {
             velocity += (new Vector2((float)Math.Cos(sprite.Rotation), (float)Math.Sin(sprite.Rotation)) * _speed);
         }
 
+        /// <summary>
+        /// Calculates the new rotations.
+        /// </summary>
+        /// <param name="asteroid">The asteroid.</param>
+        /// <param name="bullet">The bullet.</param>
+        /// <returns></returns>
         protected float[] CalculateNewRotations(Asteroid asteroid, Bullet bullet)
         {
             float[] returnedValues = new float[2] { 0, 0 };
@@ -113,6 +136,10 @@ namespace Exercice5
             return returnedValues;
         }
 
+        /// <summary>
+        /// Adds the bonus.
+        /// </summary>
+        /// <param name="_type">The _type.</param>
         public override void AddBonus(Bonus.Type _type)
         {
             base.AddBonus(_type);
@@ -126,11 +153,6 @@ namespace Exercice5
                 fakeBullet.Initialize(sprite, position);
                 HasCollided(fakeBullet);
             }
-        }
-
-        public void Draw(GameTime gameTime)
-        {
-            
         }
     }
 }

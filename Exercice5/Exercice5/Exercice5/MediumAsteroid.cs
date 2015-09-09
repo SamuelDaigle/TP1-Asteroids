@@ -7,8 +7,17 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Exercice5
 {
+    /// <summary>
+    /// Class that defines an asteroid as being a medium asteroid.
+    /// </summary>
     class MediumAsteroid : Asteroid
     {
+        /// <summary>
+        /// Determines whether the specified _other has collided.
+        /// @see AddAsteroid
+        /// @see CalculateNewRotations
+        /// </summary>
+        /// <param name="_other">The _other.</param>
         public override void HasCollided(ICollidable _other)
         {
             if (_other.GetType() == typeof(MediumAsteroid))

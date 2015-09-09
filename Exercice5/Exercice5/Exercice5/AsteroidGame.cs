@@ -47,6 +47,13 @@ namespace Exercice5
             base.Initialize();
         }
 
+        /// <summary>
+        /// Initializes the graphics mode.
+        /// </summary>
+        /// <param name="width">The width.</param>
+        /// <param name="height">The height.</param>
+        /// <param name="fullScreen">if set to <c>true</c> [full screen].</param>
+        /// <returns></returns>
         private bool InitGraphicsMode(int width, int height, bool fullScreen)
         {
             // If we aren't using a full screen mode, the height and width of the window can
@@ -146,6 +153,9 @@ namespace Exercice5
             base.Draw(gameTime);
         }
 
+        /// <summary>
+        /// Handles the input.
+        /// </summary>
         private void HandleInput()
         {
             gameState.HandleInput();

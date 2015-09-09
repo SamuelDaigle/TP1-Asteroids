@@ -8,18 +8,27 @@ using System.Xml.Serialization;
 
 namespace Exercice5
 {
+    /// <summary>
+    /// Class that is able to write inside an
+    /// existing XML file or create a new one.
+    /// </summary>
     public class XMLScoreWriter
     {
-        private XmlDocument xmlDoc;
-        private XmlNode rootNode;
-        private XmlNode userNode;
-
+        /// <summary>
+        /// Writes the XML.
+        /// @see Load
+        /// @see CreateNode
+        /// @see AppendChild
+        /// @see WriteStartDocument
+        /// @see WriteStartElement
+        /// @see WriteEndElement
+        /// @see WriteEndDocument
+        /// @see Close
+        /// </summary>
+        /// <param name="_playerName">Name of the _player.</param>
+        /// <param name="_score">The _score.</param>
         public void WriteXML(string _playerName, string _score)
         {
-            if(_playerName == "")
-            {
-                _playerName = " ";
-            }
             try
             {
                 XmlDocument myDoc = new XmlDocument();

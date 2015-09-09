@@ -7,18 +7,29 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Exercice5
 {
+    /// <summary>
+    /// Class that defines an enmey as being a small enemy.
+    /// </summary>
     public class SmallEnemy : Enemy
     {
         private int frameCount = 0;
         private float direction;
         private const float DIRECTION_VALUE = 0.05f;
 
+        /// <summary>
+        /// Updates the specified screen.
+        /// </summary>
+        /// <param name="screen">The screen.</param>
         public override void Update(BoundingBox screen)
         {
             chooseDirection();
             base.Update(screen);
         }
 
+        /// <summary>
+        /// Determines whether the specified _other has collided.
+        /// </summary>
+        /// <param name="_other">The _other.</param>
         public override void HasCollided(ICollidable _other)
         {
             if (_other.GetType() == typeof(Bullet))
@@ -30,6 +41,9 @@ namespace Exercice5
             }
         }
 
+        /// <summary>
+        /// Chooses the direction.
+        /// </summary>
         protected override void chooseDirection()
         {
             if (frameCount == 2)
@@ -54,6 +68,12 @@ namespace Exercice5
             frameCount++;
         }
 
+        /// <summary>
+        /// Chooses to attack.
+        /// @see Shoot
+        /// </summary>
+        /// <param name="movableObjects">The movable objects.</param>
+        /// <returns></returns>
         public override Bullet chooseToAttack(List<Object2D> movableObjects)
         {
             double closerDistance = 1000;
