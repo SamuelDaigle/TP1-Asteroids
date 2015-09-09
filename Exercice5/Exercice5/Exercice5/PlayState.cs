@@ -9,6 +9,10 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Exercice5
 {
+    /// <summary>
+    /// Class that defines a state for the game.
+    /// PlayState will display the game.
+    /// </summary>
     public class PlayState : IGameState
     {
         protected int level;
@@ -20,11 +24,22 @@ namespace Exercice5
         private bool exit = false;
         private bool paused = false;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PlayState"/> class.
+        /// </summary>
+        /// <param name="_level">The _level.</param>
         public PlayState(int _level)
         {
             level = _level;
         }
 
+        /// <summary>
+        /// Loads the content and Initialize the Player's instance.
+        /// @see Initialize
+        /// @see AddScoreObserver
+        /// @see StoreBullet
+        /// </summary>
+        /// <param name="_content">The _content.</param>
         public void LoadContent(ContentManager _content)
         {
             content = _content;
@@ -40,11 +55,11 @@ namespace Exercice5
             scene.Initialize(uiContainer, content);
 
             // Player
-            Player.GetInstance().Initialize(content, new Sprite(content.Load<Texture2D>("Graphics\\ship"), 0.3f), new Vector2(500, 300));
+            Player.GetInstance().Initialize(content, new Sprite(content.Load<Texture2D>("Graphics\\ship"), 0.6f), new Vector2(500, 300));
             for (int i = 0; i < Player.MAX_NB_BULLETS; i++)
             {
                 Bullet bullet = new Bullet();
-                bullet.Initialize(new Sprite(content.Load<Texture2D>("Graphics\\ship"), 0.05f), Player.GetInstance().Position);
+                bullet.Initialize(new Sprite(content.Load<Texture2D>("Graphics\\fork"), 0.4f), Player.GetInstance().Position);
                 bullet.AddVelocity(5f);
                 bullet.AddScoreObserver(Player.GetInstance());
                 Player.GetInstance().StoreBullet(bullet);
@@ -52,6 +67,12 @@ namespace Exercice5
             scene.AddDrawableObject(Player.GetInstance());
         }
 
+        /// <summary>
+        /// Updates this instance.
+        /// @see Initialize
+        /// @see AddBonusObserver
+        /// @see AddDrawableObject
+        /// </summary>
         public void Update()
         {
             if (!paused)
@@ -62,21 +83,22 @@ namespace Exercice5
                 {
                     timeLastObjectSpawned = DateTime.Now;
                     Bonus bonus = null;
+                    Vector2 position = new Vector2(RandomGenerator.GetRandomFloat(0, AsteroidGame.screenBox.Max.X), RandomGenerator.GetRandomFloat(170, AsteroidGame.screenBox.Max.Y));
                     switch (RandomGenerator.GetRandomInt(0, 4))
                     {
                         case 0:
                             bonus = new Bonus(Bonus.Type.SHRINK);
-                            bonus.Initialize(new Sprite(content.Load<Texture2D>("Graphics\\ship"), 0.3f), new Vector2(700, 500));
+                            bonus.Initialize(new Sprite(content.Load<Texture2D>("Graphics\\hatChef"), 0.3f), position);
                             bonus.AddBonusObserver(Player.GetInstance());
                             break;
                         case 1:
                             bonus = new Bonus(Bonus.Type.BIGGER_BULLETS);
-                            bonus.Initialize(new Sprite(content.Load<Texture2D>("Graphics\\ship"), 0.3f), new Vector2(700, 500));
+                            bonus.Initialize(new Sprite(content.Load<Texture2D>("Graphics\\hatBiggerBullet"), 0.3f), position);
                             bonus.AddBonusObserver(Player.GetInstance());
                             break;
                         case 2:
                             bonus = new Bonus(Bonus.Type.STOP_TIME);
-                            bonus.Initialize(new Sprite(content.Load<Texture2D>("Graphics\\ship"), 0.3f), new Vector2(700, 500));
+                            bonus.Initialize(new Sprite(content.Load<Texture2D>("Graphics\\hat_time"), 0.3f), position);
                             foreach(Asteroid asteroid in scene.GetAllAsteroids())
                             {
                                 bonus.AddBonusObserver(asteroid);
@@ -84,7 +106,7 @@ namespace Exercice5
                             break;
                         case 3:
                             bonus = new Bonus(Bonus.Type.ASTEROID_EXPLODE);
-                            bonus.Initialize(new Sprite(content.Load<Texture2D>("Graphics\\ship"), 0.3f), new Vector2(700, 500));
+                            bonus.Initialize(new Sprite(content.Load<Texture2D>("Graphics\\hatExplosion"), 0.3f), position);
                             foreach (Asteroid asteroid in scene.GetAllAsteroids())
                             {
                                 bonus.AddBonusObserver(asteroid);
@@ -92,12 +114,12 @@ namespace Exercice5
                             break;
                         case 4:
                             bonus = new Bonus(Bonus.Type.SCORE_TWICE);
-                            bonus.Initialize(new Sprite(content.Load<Texture2D>("Graphics\\ship"), 0.3f), new Vector2(700, 500));
+                            bonus.Initialize(new Sprite(content.Load<Texture2D>("Graphics\\hat2X"), 0.3f), new Vector2(700, 500));
                             bonus.AddBonusObserver(Player.GetInstance());
                             break;
                     }
                     scene.AddDrawableObject(bonus);
-                    scene.AddDrawableObject(EnemyFactory.createEnemy(RandomGenerator.GetRandomInt(1, 3), Vector2.Zero));
+                    scene.AddDrawableObject(EnemyFactory.createEnemy(RandomGenerator.GetRandomInt(1, 3)));
                 }
 
                 if (scene.onlyHasPlayer())
@@ -108,6 +130,11 @@ namespace Exercice5
             }
         }
 
+        /// <summary>
+        /// Handles the input.
+        /// @see HandleGamePadInput
+        /// @see HandleKeyboardInput
+        /// </summary>
         public void HandleInput()
         {
             if (!paused)
@@ -134,6 +161,9 @@ namespace Exercice5
             }
         }
 
+        /// <summary>
+        /// Handles the keyboard input.
+        /// </summary>
         private void HandleKeyboardInput()
         {
             if (input.IsInputPressed(Keys.Escape))
@@ -163,6 +193,9 @@ namespace Exercice5
             }
         }
 
+        /// <summary>
+        /// Handles the game pad input.
+        /// </summary>
         private void HandleGamePadInput()
         {
             if (input.IsInputPressed(Buttons.Back))
@@ -177,6 +210,10 @@ namespace Exercice5
             }
         }
 
+        /// <summary>
+        /// Draws the specified _sprite batch.
+        /// </summary>
+        /// <param name="_spriteBatch">The _sprite batch.</param>
         public void Draw(SpriteBatch _spriteBatch)
         {
             _spriteBatch.Draw(content.Load<Texture2D>("Graphics\\background"), Vector2.Zero, null, Color.White, 0f, Vector2.Zero, 2.0f, SpriteEffects.None, 0f);
@@ -185,6 +222,10 @@ namespace Exercice5
 
         // *************************************************************** //
 
+        /// <summary>
+        /// Determines whether this instance has exited.
+        /// </summary>
+        /// <returns></returns>
         public bool HasExited()
         {
             return exit;

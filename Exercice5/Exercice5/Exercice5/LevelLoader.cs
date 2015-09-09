@@ -6,15 +6,27 @@ using Microsoft.Xna.Framework;
 
 namespace Exercice5
 {
+    /// <summary>
+    /// Class that creates new asteroids according to the level.
+    /// </summary>
     public class LevelLoader
     {
         private int level;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LevelLoader"/> class.
+        /// </summary>
+        /// <param name="_level">The _level.</param>
         public LevelLoader(int _level)
         {
             level = _level;
         }
 
+        /// <summary>
+        /// Gets the scene.
+        /// @see AddObserver
+        /// </summary>
+        /// <returns></returns>
         public Scene GetScene()
         {
             Scene scene = new Scene();
@@ -25,7 +37,6 @@ namespace Exercice5
                 asteroid.AddObserver(scene);
                 scene.AddDrawableObject(asteroid);
             }
-
             return scene;
         }
     }

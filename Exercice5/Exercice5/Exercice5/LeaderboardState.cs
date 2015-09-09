@@ -9,6 +9,11 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Exercice5
 {
+    /// <summary>
+    /// Class that defines a state for the game.
+    /// LeaderboardState will display the highest scores
+    /// of different players.
+    /// </summary>
     public class LeaderboardState : IGameState
     {
         protected ContentManager content;
@@ -17,6 +22,12 @@ namespace Exercice5
         private List<Score> scores;
 
 
+        /// <summary>
+        /// Loads the content.
+        /// @see GetScores
+        /// @see ArrangeTopList
+        /// </summary>
+        /// <param name="_content">The _content.</param>
         public void LoadContent(ContentManager _content)
         {
             content = _content;
@@ -28,11 +39,18 @@ namespace Exercice5
             arrangeTopList();
         }
 
+        /// <summary>
+        /// Updates this instance.
+        /// </summary>
         public void Update()
         {
             
         }
 
+        /// <summary>
+        /// Arranges the list so the scores are written from best to worse
+        /// using bubble sorting.
+        /// </summary>
         public void arrangeTopList()
         {
 
@@ -51,6 +69,9 @@ namespace Exercice5
             }
         }
 
+        /// <summary>
+        /// Handles the input.
+        /// </summary>
         public void HandleInput()
         {
             if (input.IsInputPressed(Keys.Escape) || input.IsInputPressed(Buttons.Back))
@@ -60,6 +81,10 @@ namespace Exercice5
             }
         }
 
+        /// <summary>
+        /// Draws the specified _sprite batch.
+        /// </summary>
+        /// <param name="_spriteBatch">The _sprite batch.</param>
         public void Draw(SpriteBatch _spriteBatch)
         {
             for (int i = 0; i < scores.Count; i++)
@@ -69,6 +94,10 @@ namespace Exercice5
             }
         }
 
+        /// <summary>
+        /// Determines whether this instance has exited.
+        /// </summary>
+        /// <returns></returns>
         public bool HasExited()
         {
             return exit;

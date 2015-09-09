@@ -7,8 +7,16 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Exercice5
 {
+    /// <summary>
+    /// Class that defines an asteroid as being a small asteroid.
+    /// </summary>
     public class SmallAsteroid : Asteroid
     {
+        /// <summary>
+        /// Determines whether the specified _other has collided.
+        /// @see AddAsteroid
+        /// </summary>
+        /// <param name="_other">The _other.</param>
         public override void HasCollided(ICollidable _other)
         {
             if(_other.GetType() == typeof(SmallAsteroid))

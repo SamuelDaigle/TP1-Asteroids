@@ -9,6 +9,11 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Exercice5
 {
+    /// <summary>
+    /// Class that defines a state for the game.
+    /// MenuState will display the possible choices
+    /// to be made before starting a game.
+    /// </summary>
     public class MenuState : IGameState
     {
         protected ContentManager content;
@@ -19,6 +24,10 @@ namespace Exercice5
         private string[] optionText;
 
 
+        /// <summary>
+        /// Loads the content.
+        /// </summary>
+        /// <param name="_content">The _content.</param>
         public void LoadContent(ContentManager _content)
         {
             content = _content;
@@ -29,11 +38,19 @@ namespace Exercice5
             input = AsteroidGame.input;
         }
 
+        /// <summary>
+        /// Updates this instance.
+        /// </summary>
         public void Update()
         {
             
         }
 
+        /// <summary>
+        /// Handles the input.
+        /// @see HandleGamePadInput
+        /// @see HandleKeyboardInput
+        /// </summary>
         public void HandleInput()
         {
             if (input.IsGamePadOneConnected())
@@ -55,6 +72,9 @@ namespace Exercice5
             }
         }
 
+        /// <summary>
+        /// Handles the keyboard input.
+        /// </summary>
         private void HandleKeyboardInput()
         {
             if (input.IsInputPressed(Keys.Escape))
@@ -76,6 +96,9 @@ namespace Exercice5
             }
         }
 
+        /// <summary>
+        /// Handles the game pad input.
+        /// </summary>
         private void HandleGamePadInput()
         {
             if (input.IsInputPressed(Buttons.Back))
@@ -95,6 +118,10 @@ namespace Exercice5
             }
         }
 
+        /// <summary>
+        /// Draws the specified _sprite batch.
+        /// </summary>
+        /// <param name="_spriteBatch">The _sprite batch.</param>
         public void Draw(SpriteBatch _spriteBatch)
         {
             _spriteBatch.Draw(content.Load<Texture2D>("Graphics\\background"), Vector2.Zero, null, Color.White, 0f, Vector2.Zero, 2.0f, SpriteEffects.None, 0f);
@@ -109,11 +136,18 @@ namespace Exercice5
             }
         }
 
+        /// <summary>
+        /// Determines whether this instance has exited.
+        /// </summary>
+        /// <returns></returns>
         public bool HasExited()
         {
             return exit;
         }
 
+        /// <summary>
+        /// Selects the option.
+        /// </summary>
         private void selectOption()
         {
             if (selectedOption == 0)

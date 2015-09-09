@@ -7,8 +7,17 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Exercice5
 {
+    /// <summary>
+    /// Class that defines an asteroid as being a large asteroid.
+    /// </summary>
     class LargeAsteroid : Asteroid
     {
+        /// <summary>
+        /// Determines whether the specified _other has collided.
+        /// @see CalculateNewRotations
+        /// @see AddAsteroid
+        /// </summary>
+        /// <param name="_other">The _other.</param>
         public override void HasCollided(ICollidable _other)
         {
             if (_other.GetType() == typeof(Bullet))

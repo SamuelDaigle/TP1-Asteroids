@@ -8,12 +8,23 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Exercice5
 {
+    /// <summary>
+    /// Class that contains every object to be
+    /// displayed on the screen. Also checks
+    /// the collisions of the different objects.
+    /// </summary>
     public class Scene : IObjectAdderObserver
     {
         private ContentManager content;
         private List<Object2D> drawableObjects = new List<Object2D>();
         private UIContainer uiContainer;
 
+        /// <summary>
+        /// Gets the content.
+        /// </summary>
+        /// <value>
+        /// The content.
+        /// </value>
         public ContentManager Content
         {
             get
@@ -22,12 +33,21 @@ namespace Exercice5
             }
         }
 
+        /// <summary>
+        /// Initializes the specified _ui container.
+        /// </summary>
+        /// <param name="_uiContainer">The _ui container.</param>
+        /// <param name="_content">The _content.</param>
         public void Initialize(UIContainer _uiContainer, ContentManager _content)
         {
             uiContainer = _uiContainer;
             content = _content;
         }
 
+        /// <summary>
+        /// Adds the drawable object.
+        /// </summary>
+        /// <param name="drawableObject">The drawable object.</param>
         public void AddDrawableObject(Object2D drawableObject)
         {
             bool found = false;
@@ -44,11 +64,21 @@ namespace Exercice5
                 drawableObjects.Add(drawableObject);
         }
 
+        /// <summary>
+        /// Gets all asteroids.
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<Asteroid> GetAllAsteroids()
         {
             return drawableObjects.OfType<Asteroid>();
         }
 
+        /// <summary>
+        /// Updates the specified screen.
+        /// @see CheckIfDeleted
+        /// @see CheckCollision
+        /// </summary>
+        /// <param name="screen">The screen.</param>
         public void Update(BoundingBox screen)
         {
             uiContainer.Update();
@@ -72,13 +102,13 @@ namespace Exercice5
 
                 }
             }
-
             CheckIfDeleted();
             CheckCollision();
-
-
         }
 
+        /// <summary>
+        /// Checks the collision.
+        /// </summary>
         private void CheckCollision()
         {
             ICollidable collidableObject;
@@ -98,6 +128,9 @@ namespace Exercice5
             }
         }
 
+        /// <summary>
+        /// Checks if deleted.
+        /// </summary>
         private void CheckIfDeleted()
         {
             for (int i = 0; i < drawableObjects.Count; i++)
@@ -109,6 +142,10 @@ namespace Exercice5
             }
         }
 
+        /// <summary>
+        /// Draws the specified renderer.
+        /// </summary>
+        /// <param name="renderer">The renderer.</param>
         public void Draw(SpriteBatch renderer)
         {
             foreach (IDrawable drawable in drawableObjects.OfType<IDrawable>())
@@ -118,11 +155,19 @@ namespace Exercice5
             uiContainer.Draw(renderer);
         }
 
+        /// <summary>
+        /// Onlies the has player.
+        /// </summary>
+        /// <returns></returns>
         public bool onlyHasPlayer()
         {
             return (drawableObjects.Count == 1 && drawableObjects.First<Object2D>().GetType() == typeof(Player));
         }
 
+        /// <summary>
+        /// Adds the asteroid.
+        /// </summary>
+        /// <param name="_object">The _object.</param>
         public void AddAsteroid(Asteroid _object)
         {
             _object.AddObserver(this);
