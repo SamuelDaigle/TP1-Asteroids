@@ -33,7 +33,7 @@ namespace Exercice5
             content = _content;
             optionText = new string[NB_OPTION];
             optionText[0] = "Play";
-            optionText[1] = "Option";
+            optionText[1] = "Leaderboard";
             optionText[2] = "Exit";
             input = AsteroidGame.input;
         }
@@ -132,7 +132,7 @@ namespace Exercice5
                 textColor = Color.White;
                 if (selectedOption == i)
                     textColor = Color.Blue;
-                _spriteBatch.DrawString(content.Load<SpriteFont>("Font\\MainFont"), optionText[i], new Vector2(500, 100 * i), textColor);
+                _spriteBatch.DrawString(content.Load<SpriteFont>("Font\\MainFont"), optionText[i], new Vector2(450, 200 + 100 * i), textColor);
             }
         }
 
