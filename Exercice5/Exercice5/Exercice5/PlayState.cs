@@ -148,7 +148,7 @@ namespace Exercice5
                     HandleKeyboardInput();
                 }
             }
-            if (input.IsInputPressed(Keys.P))
+            if (input.IsInputPressed(Keys.P) || input.IsInputDown(Buttons.Start))
             {
                 if (paused)
                 {
